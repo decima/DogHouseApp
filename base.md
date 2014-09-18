@@ -5,7 +5,20 @@
 
 Salon de toilettage
 - Clients
+- Chiens
 - Toiletteurs
+
+
+Humain :
+- nom
+- prénom
+- adresse
+
+Chien :
+- nom
+- date de naissance
+- propriétaire (ID_Client)
+
 
 Créneau
 - Toilettage
