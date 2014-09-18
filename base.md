@@ -4,8 +4,8 @@
 - Soigné
 
 Salon de toilettage
--> Clients
--> Toiletteurs
+- Clients
+- Toiletteurs
 
 Créneau
 - Toilettage
