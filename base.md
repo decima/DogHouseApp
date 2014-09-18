@@ -8,12 +8,12 @@ Salon de toilettage
 -> Toiletteurs
 
 Créneau
-1) Toilettage
-2) Déplacement à domicile
+- Toilettage
+- Déplacement à domicile
 
 2 types de vue :
--> Clients
--> Toiletteurs
+- Clients
+- Toiletteurs
 
 
 
