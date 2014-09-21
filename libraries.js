@@ -53,5 +53,5 @@ application.Employe.prototype = new application.Personne({});
 
 
 application.Creneau=function(){
-    
+
 }
