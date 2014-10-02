@@ -81,6 +81,9 @@ com_crashlytics_export_strings.xml
 
 
 ### NetBeans ###
+nbproject/
+nbproject/project.properties
+nbproject/project.xml
 nbproject/private/
 build/
 nbbuild/
