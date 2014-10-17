@@ -1,3 +1,7 @@
+
+if (typeof (application) === "undefined") {
+    var application = {};
+}
 /**
  * @class adresse
  */
@@ -8,7 +12,7 @@ application.Adresse = function (rue, ville, cp) {
 };
 
 application.Adresse.prototype = {
-    toString:function(){
-        return this.rue+"\n"+this.ville+" "+this.cp;
+    toString: function () {
+        return this.rue + "\n" + this.ville + " " + this.cp;
     }
 };  

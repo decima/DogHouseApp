@@ -1,4 +1,7 @@
 
+if (typeof (application) === "undefined") {
+    var application = {};
+}
 /**
  * @class Client
  *
@@ -8,7 +11,7 @@ application.Client = function (data) {
     this.animals = [];
 };
 application.Client.prototype = application.Personne.prototype;
-application.Client.prototype.addAnimal = function (nom, sexe,race,gabarit) {
-    animal = new application.Animal(nom, sexe, race,gabarit);
+application.Client.prototype.addAnimal = function (nom, sexe, race, gabarit) {
+    animal = new application.Animal(nom, sexe, race, gabarit);
     this.animals.push(animal);
 };

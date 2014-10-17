@@ -1,3 +1,7 @@
+if (typeof (application) === "undefined") {
+    var application = {};
+}
+
 
 /**
  * @class Personne

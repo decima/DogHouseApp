@@ -1,9 +1,13 @@
+
+if (typeof (application) === "undefined") {
+    var application = {};
+}
 /**
  * @class Animal
  */
-application.Animal = function (nom, race,sexe, gabarit) {
+application.Animal = function (nom, race, sexe, gabarit) {
     this.nom = nom;
-    this.sexe = sexe?sexe:application.Animal.sexe.MALE;
+    this.sexe = sexe ? sexe : application.Animal.sexe.MALE;
     this.race = race;
     this.gabarit = gabarit ? gabarit : application.Animal.gabarit.MOYEN;
 };

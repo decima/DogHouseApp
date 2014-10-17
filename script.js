@@ -1,9 +1,15 @@
+var employes = null;
+var clients = null;
+
 var u1;
 var u2;
 var u3;
 window.onload = function () {
-    employes = new drivers.Database("employes");
-    clients = new drivers.Database("clients");
+
+    drivers.Database.sampleSearch();
+    console.log("--------------------------");
+    employes = new drivers.DB("employes");
+    clients = new drivers.DB("clients");
 
     u3 = new application.Employe({nom: "BOB", prenom: "Henri", telephone: "06 81 79 05 20", rue: "14 Avenue de la sablière", ville: "Mons-en-Baroeul", cp: "59370"});
     u1 = new application.Employe({nom: "LARGET", prenom: "Henri", telephone: "06 81 79 05 20", rue: "14 Avenue de la sablière", ville: "Mons-en-Baroeul", cp: "59370"});
@@ -14,16 +20,21 @@ window.onload = function () {
 
 
     var tmp1 = clients.addItem(u2);
-
-    console.log(tmp1);
-    console.log(clients.getItem(tmp1));
-
+    /*
+     console.log(tmp1);
+     console.log(clients.getItem(tmp1));
+     */
     employes.addItem(u1);
     employes.addItem(u3);
+    /*
+     console.log(employes.getAll());*/
+    var cdt =
+            DBC.OR(
+                    DBC.EQ("nom", "LARGET"),
+                    DBC.EQ("prenom", "Henri"));
+//console.log(employes.atomicSearchItem(DBC.EQ("prenom","Henri")));
 
-    console.log(employes.getAll());
-
-    console.log(employes.searchItem({nom: "LARGET", prenom: "Henri"}));
+    console.log(employes.searchItem(cdt));
 
 
 

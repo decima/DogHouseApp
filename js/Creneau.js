@@ -1,4 +1,6 @@
-
+if (typeof (application) === "undefined") {
+    var application = {};
+}
 
 application.Creneau = function (data) {
     this.heure_debut = data.heure.debut ? data.heure.debut.split(":") : "9:00".split(":");
