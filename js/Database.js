@@ -25,6 +25,7 @@ drivers.Database.prototype.save = function () {
 
 drivers.Database.prototype.destroy = function () {
     window.localStorage.removeItem(this.tableName);
+    this.load();
     return this;
 };
 
@@ -47,6 +48,39 @@ drivers.Database.prototype.getItem = function (index) {
         return this.datas[index];
     }
     return null;
+};
+drivers.Database.prototype.searchItem = function (searchParameters) {
+    this.load();
+    var ret = [];
+    if (this.datas !== undefined & this.datas.length > 0) {
+
+        var bk = false;
+        var index;
+        this.datas.forEach(function (a, b, c) {
+
+            bk = 1;
+            for (index in searchParameters) {
+                var attr = searchParameters[index];
+                if (a[index] === attr) {
+                    bk *=1;
+                } else if (a[index] !== attr) {
+                    bk *=0;
+                }
+
+            }
+            if (bk==1) {
+                ret.push(a);
+            }
+
+
+
+        });
+
+
+
+    }
+    return ret;
+
 };
 
 drivers.Database.prototype.getAll = function () {
