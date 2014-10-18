@@ -17,21 +17,21 @@ application.Creneau.prototype.okTime = function (tmp) {
     if (this.heure_debut[0] < heure_courante[0]
             && this.heure_fin[0] > heure_courante[0])
         return true;
-    if (this.heure_debut[0] === this.heure_fin[0]
+    if (this.heure_debut[0] == this.heure_fin[0]
             && heure_courante[1] < this.heure_fin[1]
             && heure_courante[1] >= this.heure_debut[1])
         return true;
-    if (this.heure_debut[0] === heure_courante[0]
+    if (this.heure_debut[0] == heure_courante[0]
             && this.heure_debut[1] <= heure_courante[1])
         return true;
-    if (this.heure_fin[0] === heure_courante[0]
+    if (this.heure_fin[0] == heure_courante[0]
             && this.heure_fin[1] > heure_courante[1])
         return true;
     return false;
 };
 application.Creneau.prototype.isLastQuarter = function (tmp) {
-    hf = this.heure_fin;
-    hc = tmp.split(":");
+    var hf = this.heure_fin;
+    var hc = tmp.split(":");
     if (hf[1] > 0) {
         if (hf[0] == hc[0]) {
             return ((hf[1] - 15) == hc[1]);

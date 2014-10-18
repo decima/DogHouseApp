@@ -3,6 +3,9 @@
  * @class Calendrier
  */
 
+if (typeof (application) === "undefined") {
+    var application = {};
+}
 
 /**
  * On défini la fonction inArray
@@ -24,79 +27,87 @@ Array.prototype.inArray = function (needle) {
  * @param rdv Array of Creneau
  * @constructor
  */
-application.Calendrier = function (creaneaux) {
-    this.creaneaux = creaneaux;
+application.Calendrier = function (creneaux) {
+    var oThis = this;
+    oThis.creneaux = creneaux;
     // On récupère le nombre d'employés
-    this.employes = [];
-    this.creaneaux.forEach(function(c){
-        console.log(c.toiletteur.nom);
-        if (!this.employes.inArray(c.toiletteur.nom))
-            this.employes.push(c.toiletteur.nom);
+    oThis.employes = [];
+    this.creneaux.forEach(function(c){
+        if (!oThis.employes.inArray(c.toiletteur.nom))
+            oThis.employes.push(c.toiletteur.nom);
     });
 
-    this.nb_employes = this.employes.length;
-    this.creneaux_par_employe = [this.nb_employes];
-    this.creneaux_par_employe.forEach(function(c){
-        c = [];
-    });
-    this.creaneaux.forEach(function(c){
-        this.creneaux_par_employe[this.employes.indexOf(c.toiletteur.nom)].push(c);
+    oThis.nb_employes = oThis.employes.length;
+    oThis.creneaux_par_employe = new Array(oThis.nb_employes)
+    for (var i = 0 ; i < oThis.nb_employes ; i++) {
+        oThis.creneaux_par_employe[i] = [];
+    }
+    oThis.creneaux.forEach(function(c){
+        oThis.creneaux_par_employe[oThis.employes.indexOf(c.toiletteur.nom)].push(c);
     });
 };
 
 application.Calendrier.prototype = {
     afficher:function(parent){
+        var oThis = this;
         var parent_element = document.getElementById(parent);
         if (parent_element) {
             // On construit notre emploi du temps
             var i_heure_debut = "9:00";
             var creneau_ouvert = [];
-            employes.forEeach(function(e){
-               creneau_ouvert[e] = 0;
-            });
-
-            var ligne_vierge = [employes.length];
-            for (var i = 0 ; h < employes.length ; h++) {
-                ligne_vierge[i] = [];
+            for (var i = 0 ; i < oThis.employes.length ; i++) {
+               creneau_ouvert[i] = 0;
             }
 
-            var c_par_e = this.creneaux_par_employe;
+            var c_par_e = oThis.creneaux_par_employe;
             var edt = [];
             while (i_heure_debut != "19:15") {
-                var ligne = ligne_vierge;
-                for (var i = 0 ; i < employes.length ; i++) {       // Pour chaque employé
+                var ligne = new Array(oThis.employes.length);
+                for (var i = 0 ; i < oThis.employes.length ; i++) {
+                    ligne[i] = new Array();
+                }
+                for (var i = 0 ; i < oThis.employes.length ; i++) {      // Pour chaque employé
                     ligne[i]["occupe"] = 0;
                     ligne[i]["creneau"] = null;
-                    for (var j = 0 ; j < c_par_e[i].length ; j++){  // Pour chaque créneau de cet employé
-                        if(c_par_e[i].okTime(i_heure_debut)) {      // Si la tranche horaire est dans le créneau
+                    for (var j = 0 ; j < c_par_e[i].length ; j++){      // Pour chaque créneau de cet employé
+                        console.log(i_heure_debut);
+                        console.log("["+i+"]["+j+"] : "+creneau_ouvert[i]+" | "+c_par_e[i][j].okTime(i_heure_debut) + " | " +c_par_e[i][j].isLastQuarter(i_heure_debut));
+                        if(c_par_e[i][j].okTime(i_heure_debut)) {      // Si la tranche horaire est dans le créneau
                             ligne[i]["creneau"] = c_par_e[i];
-                            (creneau_ouvert[i] == 0) ? ligne[i]["occupe"] = 1 : ligne[i]["occupe"] = 2;
-                            (creneau_ouvert[i] == 0) ? creneau_ouvert[i] = 1 : "";
-                            break;
-                        }
-                        else if (!c_par_e[i].okTime(i_heure_debut) && creneau_ouvert[i] != 0) {
-                            // Si le créneau vient de se terminer
-                            ligne[i]["occupe"] = 3;
-                            ligne[i]["creneau"] = c_par_e[i];
-                            c_par_e[i].shift();
-                            creneau_ouvert[i] = 0;
+                            if(c_par_e[i][j].isLastQuarter(i_heure_debut)) {
+                                ligne[i]["occupe"] = 3;
+                                creneau_ouvert[i] = 0;
+                            }
+                            else {
+                                (creneau_ouvert[i] == 0) ? ligne[i]["occupe"] = 1 : ligne[i]["occupe"] = 2;
+                                (creneau_ouvert[i] == 0) ? creneau_ouvert[i] = 1 : "";
+                            }
                             break;
                         }
                     }
                 }
                 edt.push(ligne);
-                i_heure_debut = incremente_quart_heure(i_heure_debut);
+                i_heure_debut = oThis.incremente_quart_heure(i_heure_debut);
             }
-            console.log(edt);
 
             // on gère l'affichage
             var tableau = "";
             tableau += "<table>";
-
-
-
-
+                tableau += "<tbody>";
+                    var heure = "9:00";
+                    for (var i = 0 ; i < edt.length ; i++) {
+                        tableau += "<tr>";
+                            var ligne = edt[i];
+                            tableau += "<td>"+heure+"</td>";
+                            for (var j = 0 ; j < ligne.length ; j++) {
+                                tableau += "<td>"+ligne[j]["occupe"]+"</td>";
+                            }
+                        tableau += "</tr>";
+                        heure = oThis.incremente_quart_heure(heure);
+                    }
+                tableau += "</tbody>";
             tableau += "</table>";
+            parent_element.innerHTML = tableau;
         }
     },
     incremente_quart_heure:function(heure){

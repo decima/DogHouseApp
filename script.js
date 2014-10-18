@@ -55,7 +55,7 @@ window.onload = function () {
     }).toObject());
 
 
-
+/*
    creneaux.push(new application.Creneau({
         heure: {debut: "14:30", fin: "15:45"},
         date: "18/10/2014",
@@ -63,7 +63,7 @@ window.onload = function () {
         type: application.Creneau.A_DOMICILE,
         toiletteur: u1,
         animal: a1
-    }).toObject());
+    }).toObject());*/
 
     console.log(creneaux[0].okTime("10:45"));
 
