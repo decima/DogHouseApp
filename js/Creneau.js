@@ -28,22 +28,32 @@ application.Creneau.prototype.okTime = function (tmp) {
             && this.heure_fin[1] > heure_courante[1])
         return true;
     return false;
-
-
-}
-
+};
+application.Creneau.prototype.isLastTime = function (tmp) {
+    hf = this.heure_fin;
+    hc = tmp.split(":");
+    if (hf[1] > 0) {
+        if (hf[0] == hc[0]) {
+            return ((hf[1] - 15) == hc[1]);
+        }
+    } else {
+        if (hf[0] - 1 == hc[0]) {
+            return  hc[0] == "45";
+        }
+    }
+    return false;
+};
 application.Creneau.type = {
     EN_SALON: 0,
     A_DOMICILE: 1
 };
-
-
 application.Creneau.prototype.toObject = function () {
     var obj = {
         toiletteur: {nom: this.toiletteur.getNom()},
         okTime: this.okTime,
-        heure_debut:this.heure_debut,
-        heure_fin:this.heure_fin,
+        isLastQuarter:this.isLastTime,
+        heure_debut: this.heure_debut,
+        heure_fin: this.heure_fin,
     };
     return obj;
 }
