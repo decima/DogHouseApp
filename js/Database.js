@@ -227,24 +227,12 @@ var DBC = drivers.DBC;
 
 drivers.Database.sampleSearch = function (output) {
     var s = new drivers.DB("sample");
-    s.addItem({prenom: "Henri", nom: "Larget", age: 22, sexe: "h", estUnHomme: function () {
-            return true;
-        }});
-    s.addItem({prenom: "John", nom: "Doe", age: 23, sexe: "h", estUnHomme: function () {
-            return true;
-        }});
-    s.addItem({prenom: "Diana", nom: "Miasgou", age: 21, sexe: "f", estUnHomme: function () {
-            return false;
-        }});
-    s.addItem({prenom: "Bella", nom: "Gray", age: 17, sexe: "f", estUnHomme: function () {
-            return false;
-        }});
-    s.addItem({prenom: "Steve", nom: "Gray", age: 15, sexe: "h", estUnHomme: function () {
-            return true;
-        }});
-    s.addItem({prenom: "Edward", nom: "Alphone", age: 16, sexe: "h", estUnHomme: function () {
-            return true;
-        }});
+    s.addItem({prenom: "Henri", nom: "Larget", age: 22, sexe: "h"});
+    s.addItem({prenom: "John", nom: "Doe", age: 23, sexe: "h"});
+    s.addItem({prenom: "Diana", nom: "Miasgou", age: 21, sexe: "f"});
+    s.addItem({prenom: "Bella", nom: "Gray", age: 17, sexe: "f"});
+    s.addItem({prenom: "Steve", nom: "Gray", age: 15, sexe: "h"});
+    s.addItem({prenom: "Edward", nom: "Alphone", age: 16, sexe: "h"});
 
     if (arguments[0]) {
         console.log(s.searchItem(DBC.EQ("prenom", "Pierre")));
