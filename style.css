@@ -8,3 +8,33 @@ html, body, div, h1,h2,h3,h4,h5,h6{
 body{
     padding: 10px;
 }
+
+
+body {
+    width: 100%;
+    margin: auto;
+}
+table, tr, td {
+    border-collapse: collapse;
+    margin: auto;
+}
+td.heure {
+    wdith: 150px;
+    height: 30px;
+    text-align: center;
+}
+td.creneau {
+    width: 200px;
+    height: 30px;
+    text-align: left;
+}
+td.creneau_salon {
+    background-color: #27ae60;
+}
+.creneau_salon + .creneau_debut {
+    border: 1px solid #1f8b4d;
+    border-bottom: 0px;
+}
+td.creneau_domicile {
+    background-color: #e74c3c;
+}
