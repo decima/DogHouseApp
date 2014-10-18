@@ -65,13 +65,11 @@ window.onload = function () {
         animal: a1
     }).toObject());
 
+    console.log(creneaux[0].okTime("10:45"));
 
 
-
-console.log(creneaux[0].okTime("10:45"));
-
-
-
+    cal = new application.Calendrier(creneaux);
+    cal.afficher("cal");
 /*
 
     var tmp1 = clients.addItem(u2);

@@ -27,19 +27,20 @@ Array.prototype.inArray = function (needle) {
 application.Calendrier = function (creaneaux) {
     this.creaneaux = creaneaux;
     // On récupère le nombre d'employés
-    var employes = [];
+    this.employes = [];
     this.creaneaux.forEach(function(c){
-        if (!employes.inArray(c.toiletteur.nom))
-            employes.push(c.toiletteur.nom);
+        console.log(c.toiletteur.nom);
+        if (!this.employes.inArray(c.toiletteur.nom))
+            this.employes.push(c.toiletteur.nom);
     });
 
-    this.nb_employes = employes.length;
-    this.creneaux_par_employe = [nb_employes];
+    this.nb_employes = this.employes.length;
+    this.creneaux_par_employe = [this.nb_employes];
     this.creneaux_par_employe.forEach(function(c){
         c = [];
     });
     this.creaneaux.forEach(function(c){
-        creneaux_par_employe[employes.indexOf(c.toiletteur.nom)].push(c);
+        this.creneaux_par_employe[this.employes.indexOf(c.toiletteur.nom)].push(c);
     });
 };
 
@@ -87,6 +88,15 @@ application.Calendrier.prototype = {
                 i_heure_debut = incremente_quart_heure(i_heure_debut);
             }
             console.log(edt);
+
+            // on gère l'affichage
+            var tableau = "";
+            tableau += "<table>";
+
+
+
+
+            tableau += "</table>";
         }
     },
     incremente_quart_heure:function(heure){
