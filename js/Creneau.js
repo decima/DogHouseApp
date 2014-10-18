@@ -11,8 +11,7 @@ application.Creneau = function (data) {
     this.toiletteur = data.toiletteur;
     this.animal = data.animal;
 }
-application.Creneau.prototype = {
-};
+application.Creneau.prototype = {};
 application.Creneau.prototype.okTime = function (tmp) {
     heure_courante = tmp.split(":");
     if (this.heure_debut[0] < heure_courante[0]
@@ -38,3 +37,13 @@ application.Creneau.type = {
     A_DOMICILE: 1
 };
 
+
+application.Creneau.prototype.toObject = function () {
+    var obj = {
+        toiletteur: {nom: this.toiletteur.getNom()},
+        okTime: this.okTime,
+        heure_debut:this.heure_debut,
+        heure_fin:this.heure_fin,
+    };
+    return obj;
+}
