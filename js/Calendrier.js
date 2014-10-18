@@ -94,6 +94,12 @@ application.Calendrier.prototype = {
             var tableau = "";
             tableau += "<table class='edt'>";
                 tableau += "<tbody>";
+                    tableau += "<thead>";
+                        tableau += "<td></td>";
+                        for (var i = 0 ; i < oThis.employes.length ; i++) {
+                            tableau += "<td>"+oThis.employes[i]+"</td>";
+                        }
+                    tableau += "</thead>";
                     var heure = "9:00";
                     for (var i = 0 ; i < edt.length ; i++) {
                         tableau += "<tr>";
@@ -125,7 +131,11 @@ application.Calendrier.prototype = {
                                             break;
                                     }
                                 }
-                                tableau += "'>"+ligne[j]["occupe"]+"</td>";
+                                tableau += "'>";
+                                if(ligne[j]["occupe"] == 3){
+                                    tableau += ligne[j]["creneau"].client.nom + " : " + ligne[j]["creneau"].animal.nom;
+                                }
+                                tableau += "</td>";
                             }
                         tableau += "</tr>";
                         heure = oThis.incremente_quart_heure(heure);
