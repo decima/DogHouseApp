@@ -29,7 +29,7 @@ application.Creneau.prototype.okTime = function (tmp) {
         return true;
     return false;
 };
-application.Creneau.prototype.isLastTime = function (tmp) {
+application.Creneau.prototype.isLastQuarter = function (tmp) {
     hf = this.heure_fin;
     hc = tmp.split(":");
     if (hf[1] > 0) {
@@ -51,7 +51,7 @@ application.Creneau.prototype.toObject = function () {
     var obj = {
         toiletteur: {nom: this.toiletteur.getNom()},
         okTime: this.okTime,
-        isLastQuarter:this.isLastTime,
+        isLastQuarter:this.isLastQuarter,
         heure_debut: this.heure_debut,
         heure_fin: this.heure_fin,
     };
