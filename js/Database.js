@@ -1,5 +1,5 @@
-if(typeof(drivers)==="undefined"){
-    var drivers={};
+if (typeof (drivers) === "undefined") {
+    var drivers = {};
 }
 Array.prototype.intersect = function (arr2) {
     var temp = [];
@@ -227,30 +227,43 @@ var DBC = drivers.DBC;
 
 drivers.Database.sampleSearch = function () {
     var s = new drivers.DB("sample");
-    s.addItem({prenom: "Henri", nom: "Larget", age: 22, sexe: "h"});
-    s.addItem({prenom: "John", nom: "Doe", age: 23, sexe: "h"});
-    s.addItem({prenom: "Diana", nom: "Miasgou", age: 21, sexe: "f"});
-    s.addItem({prenom: "Bella", nom: "Gray", age: 17, sexe: "f"});
-    s.addItem({prenom: "Steve", nom: "Gray", age: 15, sexe: "h"});
-    s.addItem({prenom: "Edward", nom: "Alphone", age: 16, sexe: "h"});
+    s.addItem({prenom: "Henri", nom: "Larget", age: 22, sexe: "h", estUnHomme: function () {
+            return true;
+        }});
+    s.addItem({prenom: "John", nom: "Doe", age: 23, sexe: "h", estUnHomme: function () {
+            return true;
+        }});
+    s.addItem({prenom: "Diana", nom: "Miasgou", age: 21, sexe: "f", estUnHomme: function () {
+            return false;
+        }});
+    s.addItem({prenom: "Bella", nom: "Gray", age: 17, sexe: "f", estUnHomme: function () {
+            return false;
+        }});
+    s.addItem({prenom: "Steve", nom: "Gray", age: 15, sexe: "h", estUnHomme: function () {
+            return true;
+        }});
+    s.addItem({prenom: "Edward", nom: "Alphone", age: 16, sexe: "h", estUnHomme: function () {
+            return true;
+        }});
 
 
-    console.log(s.searchItem(DBC.EQ("prenom", "Pierre")));
-    console.log(
-            s.searchItem(
-                    DBC.OR(
-                            DBC.AND(
-                                    DBC.EQ("sexe", "f"),
-                                    DBC.GT("age", 18)
-                                    ),
-                            DBC.AND(
-                                    DBC.EQ("sexe", "h"),
-                                    DBC.GT("age", 16)
-                                    )
-                            )
-                    )
-            );
-    console.log(s.searchItem(DBC.EQ("nom", "Gray")));
+    /*console.log(s.searchItem(DBC.EQ("prenom", "Pierre")));
+     console.log(
+     s.searchItem(
+     DBC.OR(
+     DBC.AND(
+     DBC.EQ("sexe", "f"),
+     DBC.GT("age", 18)
+     ),
+     DBC.AND(
+     DBC.EQ("sexe", "h"),
+     DBC.GT("age", 16)
+     )
+     )
+     )
+     );
+     console.log(s.searchItem(DBC.EQ("nom", "Gray")));
+     */console.log(s.searchItem(DBC.EQ("prenom", "Henri")));
 
     s.destroy();
 };
