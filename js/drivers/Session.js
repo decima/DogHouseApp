@@ -6,7 +6,7 @@ if (typeof (drivers) === "undefined") {
     var drivers = {};
 }
 
-drivers.Session = function (name) {
+drivers.Session = function () {
     if (typeof (Storage) === "undefined") {
         throw new drivers.Session.NoStorageException();
     }
@@ -19,11 +19,11 @@ drivers.Session.singleton = null;
 
 
 drivers.Session.prototype.set = function (key, val) {
-    sessionStorage.setItem(key, val);
+    sessionStorage.setItem(key, JSON.stringify(val));
 };
 
 drivers.Session.prototype.get = function (key, _default) {
-    mv = sessionStorage[key];
+    mv = JSON.parse(sessionStorage.getItem(key));
     if (mv == null || typeof (mv) == "undefined")
         mv = _default;
     return mv;

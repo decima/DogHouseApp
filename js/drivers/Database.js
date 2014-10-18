@@ -1,5 +1,5 @@
-if(typeof(drivers)==="undefined"){
-    var drivers={};
+if (typeof (drivers) === "undefined") {
+    var drivers = {};
 }
 Array.prototype.intersect = function (arr2) {
     var temp = [];
@@ -34,6 +34,7 @@ drivers.Database = function (tableName) {
         this.datas = [];
         this.tableName = tableName.toLowerCase();
         this.is_loaded = false;
+        this.load();
     } else {
         throw new drivers.Database.NoStorageException();
     }

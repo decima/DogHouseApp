@@ -20,7 +20,10 @@ drivers.Route.prototype.assignRoute = function (path, action) {
     var path1 = path.replace(/\/+/g, "\/").toLowerCase();
     path1 = path1.replace(/^\//, "");
     path1 = path1.replace(/\/$/, "");
-    if (path1.match(/\{[a-zA-Z0-9_]+\}/g) !== null) {
+    if (path1 == "") {
+        this.routes.fixed["HOME"] = action;
+    }
+    else if (path1.match(/\{[a-zA-Z0-9_]+\}/g) !== null) {
         var path2 = path1.replace(/{[a-zA-Z0-9-_]+\}/, "_var");
         this.routes.variables[path2] = action;
     } else {
@@ -28,16 +31,27 @@ drivers.Route.prototype.assignRoute = function (path, action) {
         this.routes.fixed[path2] = action;
     }
 };
-
-
+if (typeof (drivers.Route.prototype.connected_function) == "undefined") {
+    drivers.Route.prototype.connected_function = function () {
+        return true;
+    }
+}
 drivers.Route.prototype.proceed = function () {
+    var v = this.connected_function();
+
     var path = "/";
     if (location.hash.length > 0) {
         path = location.hash.replace("#", "");
     }
+    if (!v) {
+        path = "/";
+    }
     var path1 = path.replace(/\/+/g, "\/").toLowerCase();
     path1 = path1.replace(/^\//, "");
     path1 = path1.replace(/\/$/, "");
+    if (path1 == "") {
+        path1 = "HOME";
+    }
     if (typeof (this.routes.fixed[path1]) === "function") {
         return this.routes.fixed[path1]();
     }
@@ -53,14 +67,14 @@ drivers.Route.prototype.proceed = function () {
                     if (element !== url[key]) {
                         is_path = false;
                     }
-                }else{
+                } else {
                     params.push(url[key]);
                 }
             });
         }
-        
-        if(is_path){
-            return this.routes.variables[index].apply(null,params);
+
+        if (is_path) {
+            return this.routes.variables[index].apply(null, params);
         }
     }
 
