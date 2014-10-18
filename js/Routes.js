@@ -26,7 +26,14 @@ application.Routes = {
     "/logout": function () {
         session.set("logged", false);
         changePage("", "page");
+    },
+    "/calendar": function () {
+        //prendre à partir de la date du jour
+    },
+    "/calendar/{date}": function (date) {
+        //prendre à partir d'une autre date
     }
+
 
 
 
