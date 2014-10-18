@@ -225,7 +225,7 @@ drivers.DB = drivers.Database;
 drivers.DBC = drivers.Database.Conditions;
 var DBC = drivers.DBC;
 
-drivers.Database.sampleSearch = function () {
+drivers.Database.sampleSearch = function (output) {
     var s = new drivers.DB("sample");
     s.addItem({prenom: "Henri", nom: "Larget", age: 22, sexe: "h", estUnHomme: function () {
             return true;
@@ -246,24 +246,24 @@ drivers.Database.sampleSearch = function () {
             return true;
         }});
 
-
-    /*console.log(s.searchItem(DBC.EQ("prenom", "Pierre")));
-     console.log(
-     s.searchItem(
-     DBC.OR(
-     DBC.AND(
-     DBC.EQ("sexe", "f"),
-     DBC.GT("age", 18)
-     ),
-     DBC.AND(
-     DBC.EQ("sexe", "h"),
-     DBC.GT("age", 16)
-     )
-     )
-     )
-     );
-     console.log(s.searchItem(DBC.EQ("nom", "Gray")));
-     */console.log(s.searchItem(DBC.EQ("prenom", "Henri")));
-
+    if (arguments[0]) {
+        console.log(s.searchItem(DBC.EQ("prenom", "Pierre")));
+        console.log(
+                s.searchItem(
+                        DBC.OR(
+                                DBC.AND(
+                                        DBC.EQ("sexe", "f"),
+                                        DBC.GT("age", 18)
+                                        ),
+                                DBC.AND(
+                                        DBC.EQ("sexe", "h"),
+                                        DBC.GT("age", 16)
+                                        )
+                                )
+                        )
+                );
+        console.log(s.searchItem(DBC.EQ("nom", "Gray")));
+        console.log(s.searchItem(DBC.EQ("prenom", "Henri")));
+    }
     s.destroy();
 };
