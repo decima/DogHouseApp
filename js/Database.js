@@ -1,33 +1,41 @@
+/**
+ * drivers.Database
+ * @author H. Larget <henri@larget.fr>
+ */
 if (typeof (drivers) === "undefined") {
     var drivers = {};
 }
-Array.prototype.intersect = function (arr2) {
-    var temp = [];
-    for (var i = 0; i < this.length; i++) {
-        for (var k = 0; k < arr2.length; k++) {
-            if (this[i] === arr2[k]) {
-                temp.push(this[i]);
-                break;
+if (typeof (Array.prototype.intersect) == "undefined") {
+    Array.prototype.intersect = function (arr2) {
+        var temp = [];
+        for (var i = 0; i < this.length; i++) {
+            for (var k = 0; k < arr2.length; k++) {
+                if (this[i] === arr2[k]) {
+                    temp.push(this[i]);
+                    break;
+                }
             }
         }
-    }
-    return temp;
+        return temp;
+    };
 }
-Array.prototype.union = function (arr2) {
-    var temp = [];
-    for (var i = 0; i < this.length; i++) {
-        temp.push(this[i]);
-    }
-    for (var j = 0; j < arr2.length; j++) {
-        var add = true;
-        for (var k = 0; k < temp.length; k++) {
-            if (temp[k] === arr2[j])
-                add = false;
+if (typeof (Array.prototype.union) == "undefined") {
+    Array.prototype.union = function (arr2) {
+        var temp = [];
+        for (var i = 0; i < this.length; i++) {
+            temp.push(this[i]);
         }
-        if (add)
-            temp.push(arr2[j]);
-    }
-    return temp;
+        for (var j = 0; j < arr2.length; j++) {
+            var add = true;
+            for (var k = 0; k < temp.length; k++) {
+                if (temp[k] === arr2[j])
+                    add = false;
+            }
+            if (add)
+                temp.push(arr2[j]);
+        }
+        return temp;
+    };
 }
 drivers.Database = function (tableName) {
     if (typeof (Storage) !== "undefined") {
@@ -95,7 +103,7 @@ drivers.Database.prototype.replaceItem = function (index, item) {
         this.save();
         return idex;
     }
-}
+};
 
 drivers.Database.prototype.getAll = function () {
     this.load();
@@ -163,7 +171,7 @@ drivers.Database.Conditions.NEQ = function (field, value) {
 };
 
 drivers.Database.prototype.atomicSearchItem = function (cdt) {
-    ret = [];
+    var ret = [];
     this.datas.forEach(function (a, b, c) {
         switch (cdt.getType()) {
             case drivers.Database.Conditions.type.EQ:
@@ -194,7 +202,7 @@ drivers.Database.prototype.atomicSearchItem = function (cdt) {
     });
     return ret;
 
-}
+};
 
 drivers.Database.prototype.searchItem = function (cdt) {
     var ret = [];
