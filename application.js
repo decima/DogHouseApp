@@ -2,8 +2,7 @@ var DEBUG_MODE = window.location.search.toLowerCase() == "?debug";
 var changePage = function (url) {
     if (arguments[1] != "undefined") {
         var parent_element = document.getElementById(arguments[1]);
-        while (parent_element.firstChild)
-            parent_element.removeChild(parent_element.firstChild);
+        parent_element.innerHTML = "";
     }
     window.location.hash = url;
 }

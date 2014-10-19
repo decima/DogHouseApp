@@ -39,7 +39,9 @@ view.Login.prototype.afficher = function (parent) {
 
     var input_login = document.createElement("input");
     input_login.setAttribute("id", "nickname");
-        input_login.setAttribute("autofocus", "autofocus");
+    input_login.setAttribute("autofocus", "autofocus");
+
+    input_login.value = "florent";
 
     input_login.setAttribute("placeholder", "Votre identifiant");
     input_login.style.width = "300px";
@@ -54,6 +56,8 @@ view.Login.prototype.afficher = function (parent) {
     input_pass.setAttribute("placeholder", "Votre mot de passe");
     input_pass.style.width = "300px";
     input_pass.style.height = "30px";
+
+    input_pass.value = "654321";
 
     input_pass.style.fontSize = "20px";
     input_pass.style.marginLeft = "50px";
@@ -83,5 +87,4 @@ view.Login.prototype.afficher = function (parent) {
 
     form.appendChild(div);
     return input_submit;
-
 };

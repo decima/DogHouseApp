@@ -170,5 +170,12 @@ application.Calendrier.prototype = {
     },
     toString:function(){
         return this.creaneaux;
+    },
+    getCreneauxByUserAndDate:function(user, date){
+        var db = new drivers.DB("creneaux");
+        var res = db.searchItem(drivers.DBC.AND(drivers.DBC.EQ("toiletteur['nom']", user), drivers.DBC.EQ("pass", passwd)));
+        if (res.length > 0)
+            return true;
+        return false;
     }
 };
