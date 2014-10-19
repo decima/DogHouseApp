@@ -38,7 +38,6 @@ application.Users.prototype.create = function (login, password, role) {
 application.Users.prototype.connect = function (login, passwd) {
     var db = new drivers.DB("users");
     var res = db.searchItem(drivers.DBC.AND(drivers.DBC.EQ("user", login), drivers.DBC.EQ("pass", passwd)));
-    console.log(res);
     if (res.length > 0)
         return true;
     return false;

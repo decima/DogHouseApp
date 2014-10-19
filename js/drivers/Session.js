@@ -19,17 +19,17 @@ drivers.Session.singleton = null;
 
 
 drivers.Session.prototype.set = function (key, val) {
-    sessionStorage.setItem(key, JSON.stringify(val));
+    window.localStorage.setItem("session_"+key, JSON.stringify(val));
 };
 
 drivers.Session.prototype.get = function (key, _default) {
-    mv = JSON.parse(sessionStorage.getItem(key));
+    mv = JSON.parse(window.localStorage.getItem("session_"+key));
     if (mv == null || typeof (mv) == "undefined")
         mv = _default;
     return mv;
 };
 drivers.Session.prototype.unset = function (key) {
-    sessionStorage.removeItem(key);
+    window.localStorage.removeItem("session_"+key);
 };
 
 

@@ -27,11 +27,23 @@ application.Routes = {
         session.set("logged", false);
         changePage("", "page");
     },
-    "/calendar": function () {
-        //prendre à partir de la date du jour
-    },
     "/calendar/{date}": function (date) {
         //prendre à partir d'une autre date
+    },
+    "/add-event/{date}": function (date) {
+
+    },
+    "/delete-event/{id}": function (eid) {
+
+    },
+    "/clients": function () {
+
+    },
+    "/clients/add": function () {
+
+    },
+    "/clients/edit/{id}":function (cid) {
+
     }
 
 
