@@ -43,8 +43,7 @@ application.Routes = {
         page = new view.Client();
         var db_clt = new drivers.DB("clients");
         var all_clt = db_clt.getAll();
-        console.log(all_clt);
-        page.afficher("subpage", view.Client.action.LIST);
+        page.afficher("subpage", view.Client.action.LIST, all_clt);
     },
     "/clients/add": function () {
         page = new view.Client();
@@ -59,8 +58,9 @@ application.Routes = {
 
             if(nom != "" && prenom != "" && tel != "") {
                 var db_clt = new drivers.DB("clients");
-                var clt = new application.Client({nom: "'"+nom+"'", prenom: "'"+prenom+"'", telephone: "'"+tel+"'", rue: "'"+adresse+"'", ville: "'"+ville+"'", cp: "'"+cp+"'"});
+                var clt = new application.Client({nom: ""+nom+"", prenom: ""+prenom+"", telephone: ""+tel+"", rue: ""+adresse+"", ville: ""+ville+"", cp: ""+cp+""});
                 db_clt.addItem(clt);
+                changePage("/clients/add", "subpage");
             }
             else {
                 alert("Informations incomplètes !");
@@ -68,7 +68,42 @@ application.Routes = {
         });
     },
     "/clients/edit/{id}":function (cid) {
+        page = new view.Client();
+        var db_clt = new drivers.DB("clients");
+        var clt = db_clt.getItem(cid);
+        if(clt.length < 1) {
+            alert("Client introuvable");
+        }
+        var buttons = page.afficher("subpage", view.Client.action.EDIT, clt);
+        buttons[0].addEventListener("click", function(){
+            // Modifier
+            var nom = document.getElementById("lastName").value;
+            var prenom = document.getElementById("firstName").value;
+            var tel = document.getElementById("phone").value;
+            var adresse = document.getElementById("address").value;
+            var cp = document.getElementById("cp").value;
+            var ville = document.getElementById("city").value;
 
+            if(nom != "" && prenom != "" && tel != "") {
+                var db_clt = new drivers.DB("clients");
+                var clt = new application.Client({nom: ""+nom+"", prenom: ""+prenom+"", telephone: ""+tel+"", rue: ""+adresse+"", ville: ""+ville+"", cp: ""+cp+""});
+                db_clt.replaceItem(cid,clt);
+                changePage("/clients", "subpage");
+            }
+            else {
+                alert("Informations incomplètes !");
+            }
+        });
+        buttons[1].addEventListener("click", function(){
+            // Supprimer
+            db_clt.removeItem(cid);
+            changePage("/clients", "subpage");
+        });
+
+        /*
+        var db_clt = new drivers.DB("clients");
+        db_clt.destroy();
+        */
     }
 
 
