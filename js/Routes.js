@@ -71,39 +71,50 @@ application.Routes = {
         page = new view.Client();
         var db_clt = new drivers.DB("clients");
         var clt = db_clt.getItem(cid);
-        if(clt.length < 1) {
+        if(clt == null) {
             alert("Client introuvable");
         }
-        var buttons = page.afficher("subpage", view.Client.action.EDIT, clt);
-        buttons[0].addEventListener("click", function(){
-            // Modifier
-            var nom = document.getElementById("lastName").value;
-            var prenom = document.getElementById("firstName").value;
-            var tel = document.getElementById("phone").value;
-            var adresse = document.getElementById("address").value;
-            var cp = document.getElementById("cp").value;
-            var ville = document.getElementById("city").value;
+        else {
+            var db_dog = new drivers.DB("Animaux");
+            var dogs = db_dog.searchItem(drivers.DBC.AND(drivers.DBC.EQ("client", clt.nom)));
 
-            if(nom != "" && prenom != "" && tel != "") {
-                var db_clt = new drivers.DB("clients");
-                var clt = new application.Client({nom: ""+nom+"", prenom: ""+prenom+"", telephone: ""+tel+"", rue: ""+adresse+"", ville: ""+ville+"", cp: ""+cp+""});
-                db_clt.replaceItem(cid,clt);
+            var buttons = page.afficher("subpage", view.Client.action.EDIT, clt, dogs);
+            buttons[0].addEventListener("click", function () {
+                // Modifier
+                var nom = document.getElementById("lastName").value;
+                var prenom = document.getElementById("firstName").value;
+                var tel = document.getElementById("phone").value;
+                var adresse = document.getElementById("address").value;
+                var cp = document.getElementById("cp").value;
+                var ville = document.getElementById("city").value;
+
+                if (nom != "" && prenom != "" && tel != "") {
+                    var db_clt = new drivers.DB("clients");
+                    var clt = new application.Client({nom: "" + nom + "", prenom: "" + prenom + "", telephone: "" + tel + "", rue: "" + adresse + "", ville: "" + ville + "", cp: "" + cp + ""});
+                    db_clt.replaceItem(cid, clt);
+                    changePage("/clients", "subpage");
+                }
+                else {
+                    alert("Informations incomplètes !");
+                }
+            });
+            buttons[1].addEventListener("click", function () {
+                // Supprimer
+                db_clt.removeItem(cid);
                 changePage("/clients", "subpage");
-            }
-            else {
-                alert("Informations incomplètes !");
-            }
-        });
-        buttons[1].addEventListener("click", function(){
-            // Supprimer
-            db_clt.removeItem(cid);
-            changePage("/clients", "subpage");
-        });
+            });
 
-        /*
-        var db_clt = new drivers.DB("clients");
-        db_clt.destroy();
-        */
+            /*
+             var db_clt = new drivers.DB("clients");
+             db_clt.destroy();
+             */
+        }
+    },
+    "/clients/edit/{id}/add_animal":function (cid) {
+
+    },
+    "/clients/edit/{id}/edit_animal/{aid}":function (cid, aid) {
+
     }
 
 

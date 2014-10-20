@@ -322,6 +322,69 @@ view.Client.prototype.afficher = function (parent, action) {
             input_city.value = client.adresse.ville;
             div.appendChild(input_city);
 
+            if(arguments[3])
+            {
+                var dogs = arguments[3];
+
+                var div_sep = document.createElement("div");
+                div_sep.style.width = "300px";
+                div_sep.style.height = "1px";
+                div_sep.style.backgroundColor = "#CCC";
+                div_sep.style.margin = "auto";
+                div_sep.style.marginTop = "20px";
+                div.appendChild(div_sep);
+
+                var titre = document.createElement("div");
+                titre.innerHTML = "Chiens de "+client.nom+" "+client.prenom;
+                titre.style.margin = "auto";
+                titre.style.color = "#2c3e50";
+                titre.style.fontSize = "28px";
+                titre.style.textAlign = "center";
+                titre.style.fontWeight = "600";
+                titre.style.paddingTop = "20px";
+                div.appendChild(titre);
+
+                if(dogs.length == 0){
+                    var div_addDog_info = document.createElement("div");
+                    div_addDog_info.innerHTML = "Aucun chien trouvé";
+                    div_addDog_info.style.margin = "auto";
+                    div_addDog_info.style.color = "#2c3e50";
+                    div_addDog_info.style.fontSize = "14px";
+                    div_addDog_info.style.textAlign = "center";
+                    div_addDog_info.style.fontWeight = "400";
+                    div_addDog_info.style.paddingTop = "20px";
+                    div.appendChild(div_addDog_info);
+                }
+                else {
+                    // On affiche la liste des chiens
+                }
+            }
+
+
+            var div_addDog = document.createElement("div");
+            div_addDog.style.width = "100%";
+            div_addDog.style.height = "50px";
+            div_addDog.style.margin = "auto";
+            div_addDog.style.position = "relative";
+            div_addDog.style.marginTop = "20px";
+            div.appendChild(div_addDog);
+
+            var input_addDog = document.createElement("button");
+            input_addDog.setAttribute("id", "add-dog-btn");
+            var text_addDog = document.createTextNode("AJOUTER UN CHIEN");
+            input_addDog.appendChild(text_addDog);
+            input_addDog.style.width = "300px";
+            input_addDog.style.height = "50px";
+            input_addDog.style.fontSize = "25px";
+            input_addDog.style.background = "#2c3e50";
+            input_addDog.style.color = "#ecf0f1";
+            input_addDog.style.cursor = "pointer";
+            input_addDog.style.position = "relative";
+            input_addDog.style.margin = "auto";
+            input_addDog.style.border = "0px";
+            input_addDog.style.display = "block";
+            div_addDog.appendChild(input_addDog);
+
             var input_delete = document.createElement("button");
             input_delete.setAttribute("id", "delete-btn");
             input_delete.setAttribute("title", "Supprimer");
@@ -343,7 +406,7 @@ view.Client.prototype.afficher = function (parent, action) {
             var input_submit = document.createElement("button");
             input_submit.setAttribute("id", "add-btn");
 
-            var text_submit = document.createTextNode("Modifier");
+            var text_submit = document.createTextNode("MODIFIER");
             input_submit.appendChild(text_submit);
             input_submit.style.width = "80%";
             input_submit.style.height = "50px";
