@@ -75,10 +75,11 @@ application.Routes = {
             alert("Client introuvable");
         }
         else {
-            var db_dog = new drivers.DB("Animaux");
-            var dogs = db_dog.searchItem(drivers.DBC.AND(drivers.DBC.EQ("client", clt.nom)));
+            var db_dog = new drivers.DB("animaux");
+            console.log(db_dog.getAll());
+            var dogs = db_dog.searchItem(drivers.DBC.AND(drivers.DBC.EQ("cid", cid)));
 
-            var buttons = page.afficher("subpage", view.Client.action.EDIT, clt, dogs);
+            var buttons = page.afficher("subpage", view.Client.action.EDIT, clt, cid, dogs);
             buttons[0].addEventListener("click", function () {
                 // Modifier
                 var nom = document.getElementById("lastName").value;
@@ -102,6 +103,10 @@ application.Routes = {
                 // Supprimer
                 db_clt.removeItem(cid);
                 changePage("/clients", "subpage");
+            });
+            buttons[2].addEventListener("click", function () {
+                // Ajouter un chien
+                changePage("/clients/edit/"+cid+"/add_animal", "subpage");
             });
 
             /*
@@ -175,10 +180,58 @@ application.Routes = {
         }
     },
     "/clients/edit/{id}/add_animal": function (cid) {
+        page = new view.Animal();
+        var button = page.afficher("subpage", view.Animal.action.ADD);
+        button.addEventListener("click", function () {
+            // Ajouter
+            var nom = document.getElementById("nom").value;
+            var sexe = document.getElementById("sexe").selectedIndex;
+            var race = document.getElementById("race").value;
+            var gabarit = document.getElementById("gabarit").selectedIndex;
 
+            if (nom != "" && sexe != "-1" && race != "" && gabarit != "-1") {
+                var db_dog = new drivers.DB("animaux");
+                //db_dog.destroy();
+                var dog = new application.Animal({cid: "" + cid + "", nom: "" + nom + "", sexe: "" + sexe + "", race: "" + race + "", gabarit: "" + gabarit + ""});
+                db_dog.addItem(dog);
+                changePage("/clients/edit/"+cid, "subpage");
+            }
+            else {
+                alert("Informations incomplètes !");
+            }
+        });
     },
-    "/clients/edit/{id}/edit_animal/{aid}": function (cid, aid) {
+    "/clients/edit/{id}/edit_animal/{id}": function (cid, aid) {
+        page = new view.Animal();
+        var db_dog = new drivers.DB("animaux");
+        var dog = db_dog.getItem(aid);
+        if (dog == null) {
+            alert("Chien introuvable");
+            changePage("/clients/edit/"+cid, "subpage");
+        } else {
+            var buttons = page.afficher("subpage", view.Animal.action.EDIT, dog);
+            buttons[0].addEventListener("click", function () {
+                // Modifier
+                var nom = document.getElementById("nom").value;
+                var sexe = document.getElementById("sexe").selectedIndex;
+                var race = document.getElementById("race").value;
+                var gabarit = document.getElementById("gabarit").selectedIndex;
 
+                if (nom != "" && sexe != "-1" && race != "" && gabarit != "-1") {
+                    var dog2 = new application.Animal({cid: "" + cid + "", nom: "" + nom + "", sexe: "" + sexe + "", race: "" + race + "", gabarit: "" + gabarit + ""});
+                    db_dog.replaceItem(aid, dog2);
+                    changePage("/clients/edit/" + cid, "subpage");
+                }
+                else {
+                    alert("Informations incomplètes !");
+                }
+            });
+            buttons[1].addEventListener("click", function () {
+                // Supprimer
+                db_dog.removeItem(aid);
+                changePage("/clients/edit/" + cid, "subpage");
+            });
+        }
     }
 
 

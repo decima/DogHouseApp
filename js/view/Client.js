@@ -272,20 +272,6 @@ view.Client.prototype.afficher = function (parent, action) {
             input_phone.value = client.telephone;
             div.appendChild(input_phone);
 
-            /*
-             var input_num_address = document.createElement("input");
-             input_num_address.setAttribute("id", "num_address");
-             input_num_address.setAttribute("autofocus", "autofocus");
-             input_num_address.setAttribute("placeholder", "N°");
-             input_num_address.style.width = "300px";
-             input_num_address.style.height = "30px";
-             input_num_address.style.fontSize = "20px";
-             input_num_address.style.margin = "10px";
-             input_num_address.style.marginRight = "50px";
-             input_num_address.style.marginLeft = "50px";
-             div.appendChild(input_num_address);
-             */
-
             var input_address = document.createElement("input");
             input_address.setAttribute("id", "address");
             input_address.setAttribute("placeholder", "Adresse");
@@ -322,9 +308,9 @@ view.Client.prototype.afficher = function (parent, action) {
             input_city.value = client.adresse.ville;
             div.appendChild(input_city);
 
-            if(arguments[3])
+            if(arguments[4])
             {
-                var dogs = arguments[3];
+                var dogs = arguments[4];
 
                 var div_sep = document.createElement("div");
                 div_sep.style.width = "300px";
@@ -357,6 +343,20 @@ view.Client.prototype.afficher = function (parent, action) {
                 }
                 else {
                     // On affiche la liste des chiens
+                    var div_tableau = document.createElement("div");
+                    var cid = arguments[3];
+                    var tableau = "<table>";
+                    for(var i = 0 ; i < dogs.length ; i++){
+                        if(dogs[i] != null){
+                            tableau += "<tr>";
+                            tableau += "<td>"+dogs[i].nom+"</td>";
+                            tableau += "<td onclick='changePage(\"clients/edit/"+cid+"/edit_animal/"+i+"\", \"subpage\");'>Modifier</td>";
+                            tableau += "</tr>";
+                        }
+                    }
+                    tableau += "</table>";
+                    div_tableau.innerHTML = tableau;
+                    div.appendChild(div_tableau);
                 }
             }
 
@@ -425,6 +425,7 @@ view.Client.prototype.afficher = function (parent, action) {
             var buttons = [];
             buttons.push(input_submit);
             buttons.push(input_delete);
+            buttons.push(input_addDog);
             console.log(buttons);
 
             return buttons;

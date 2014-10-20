@@ -5,11 +5,12 @@ if (typeof (application) === "undefined") {
 /**
  * @class Animal
  */
-application.Animal = function (nom, race, sexe, gabarit) {
-    this.nom = nom;
-    this.sexe = sexe ? sexe : application.Animal.sexe.MALE;
-    this.race = race;
-    this.gabarit = gabarit ? gabarit : application.Animal.gabarit.MOYEN;
+application.Animal = function (data) {
+    this.cid = data.cid;
+    this.nom = data.nom;
+    this.sexe = data.sexe ? data.sexe : application.Animal.sexe.MALE;
+    this.race = data.race;
+    this.gabarit = data.gabarit ? data.gabarit : application.Animal.gabarit.MOYEN;
 };
 
 application.Animal.gabarit = {
