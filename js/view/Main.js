@@ -12,9 +12,7 @@ view.Main.prototype.afficher = function (parent) {
     header.style.background = "#ecf0f1";
     header.style.width = "100%";
     header.style.height = "150px";
-    if (DEBUG_MODE !== "undefined" && DEBUG_MODE) {
-        
-    }
+
     var title = document.createElement("h1");
     title.appendChild(document.createTextNode("DogHouse"));
     title.style.marginTop = "0px";
@@ -40,8 +38,16 @@ view.Main.prototype.afficher = function (parent) {
     list_client.innerHTML = "Liste des clients";
     header.appendChild(list_client);
 
+    var list_employes = document.createElement("div");
+    list_employes.setAttribute("onclick", "changePage(\"employes\", \"subpage\");");
+    list_employes.innerHTML = "Liste des employés";
+    header.appendChild(list_employes);
     parent_element.appendChild(header);
-
+    var add_employes = document.createElement("div");
+    add_employes.setAttribute("onclick", "changePage(\"employes/add\", \"subpage\");");
+    add_employes.innerHTML = "Ajouter un employé";
+    header.appendChild(add_employes);
+    parent_element.appendChild(header);
     var contenu = document.createElement("div");
     contenu.setAttribute("id", "subpage");
     header.style.width = "100%";

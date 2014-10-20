@@ -5,7 +5,7 @@ var changePage = function (url) {
         parent_element.innerHTML = "";
     }
     window.location.hash = url;
-}
+};
 drivers.Route.prototype.connected_function = function () {
     return session.get("logged", false);
 };
