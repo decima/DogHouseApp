@@ -11,43 +11,56 @@ view.Main.prototype.afficher = function (parent) {
     header.setAttribute("id", "header");
     header.style.background = "#ecf0f1";
     header.style.width = "100%";
-    header.style.height = "150px";
+    header.style.height = "100px";
+
+    var bandeau_milieu = document.createElement("div");
+    bandeau_milieu.setAttribute("id", "header_interne");
+    bandeau_milieu.style.width = "1000px";
+    bandeau_milieu.style.height = "100px";
+    bandeau_milieu.style.margin = "auto";
+    header.appendChild(bandeau_milieu);
 
     var title = document.createElement("h1");
     title.appendChild(document.createTextNode("DogHouse"));
     title.style.marginTop = "0px";
-    header.appendChild(title);
+    bandeau_milieu.appendChild(title);
 
     var deconnexion = document.createElement("div");
     deconnexion.setAttribute("onclick", "changePage(\"logout\", \"page\");");
     deconnexion.innerHTML = "Déconnexion";
-    header.appendChild(deconnexion);
+    bandeau_milieu.appendChild(deconnexion);
+
+    var accueil = document.createElement("div");
+    accueil.setAttribute("onclick", "changePage(\"\", \"page\");");
+    accueil.innerHTML = "Accueil";
+    bandeau_milieu.appendChild(accueil);
 
     var add_event = document.createElement("div");
     add_event.setAttribute("onclick", "changePage(\"add-event/2014-10-18\", \"subpage\");");
     add_event.innerHTML = "Ajouter un créneau";
-    header.appendChild(add_event);
+    bandeau_milieu.appendChild(add_event);
 
     var add_client = document.createElement("div");
     add_client.setAttribute("onclick", "changePage(\"clients/add\", \"subpage\");");
     add_client.innerHTML = "Ajouter un client";
-    header.appendChild(add_client);
+    bandeau_milieu.appendChild(add_client);
 
     var list_client = document.createElement("div");
     list_client.setAttribute("onclick", "changePage(\"clients\", \"subpage\");");
     list_client.innerHTML = "Liste des clients";
-    header.appendChild(list_client);
+    bandeau_milieu.appendChild(list_client);
 
     var list_employes = document.createElement("div");
     list_employes.setAttribute("onclick", "changePage(\"employes\", \"subpage\");");
     list_employes.innerHTML = "Liste des employés";
-    header.appendChild(list_employes);
+    bandeau_milieu.appendChild(list_employes);
     parent_element.appendChild(header);
     var add_employes = document.createElement("div");
     add_employes.setAttribute("onclick", "changePage(\"employes/add\", \"subpage\");");
     add_employes.innerHTML = "Ajouter un employé";
-    header.appendChild(add_employes);
+    bandeau_milieu.appendChild(add_employes);
     parent_element.appendChild(header);
+
     var contenu = document.createElement("div");
     contenu.setAttribute("id", "subpage");
     header.style.width = "100%";

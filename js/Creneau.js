@@ -3,7 +3,6 @@ if (typeof (application) === "undefined") {
 }
 
 application.Creneau = function (data) {
-    console.log(data);
     this.heure_debut = data.heure.debut ? data.heure.debut.split(":") : "9:00".split(":");
     this.heure_fin = data.heure.fin ? data.heure.fin.split(":") : "18:00".split(":");
     this.date = data.date;

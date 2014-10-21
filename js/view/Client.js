@@ -426,7 +426,6 @@ view.Client.prototype.afficher = function (parent, action) {
             buttons.push(input_submit);
             buttons.push(input_delete);
             buttons.push(input_addDog);
-            console.log(buttons);
 
             return buttons;
             break;

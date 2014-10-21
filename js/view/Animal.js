@@ -147,7 +147,6 @@ view.Animal.prototype.afficher = function (parent, action) {
             return input_submit;
             break;
         case view.Animal.action.EDIT:
-            console.log("ici");
             var dog = arguments[2];
 
             var form = document.createElement("div");
@@ -229,6 +228,7 @@ view.Animal.prototype.afficher = function (parent, action) {
             input_race.style.margin = "10px";
             input_race.style.marginRight = "50px";
             input_race.style.marginLeft = "50px";
+            input_race.value = dog.race;
             div.appendChild(input_race);
 
             var select_gabarit = document.createElement("select");
@@ -307,7 +307,6 @@ view.Animal.prototype.afficher = function (parent, action) {
             var buttons = [];
             buttons.push(input_submit);
             buttons.push(input_delete);
-            console.log(buttons);
 
             return buttons;
             break;

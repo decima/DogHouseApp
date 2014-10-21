@@ -32,25 +32,20 @@ view.Event.prototype.afficher = function (parent, action) {
     switch (action) {
         case view.Event.action.ADD:
             // Si on souhaite ajouter un évènement
-            var db = new drivers.DB("clients");
-            var res = db.getAll();
-            console.log(res);
-
             var form = document.createElement("div");
             parent_element.appendChild(form);
             parent_element.style.background = "#2c3e50";
             var titre = document.createElement("div");
-            titre.innerHTML = "Ajouter un évènement";
+            titre.innerHTML = "Ajouter un créneau";
             titre.style.margin = "auto";
             titre.style.color = "#2c3e50";
             titre.style.fontSize = "28px";
             titre.style.textAlign = "center";
             titre.style.fontWeight = "600";
-            titre.style.top = "20px";
-            titre.style.position = "relative";
+            titre.style.paddingTop = "20px";
             form.appendChild(titre);
 
-            form.setAttribute("class", "new_client_form");
+            form.setAttribute("class", "new_creneau_form");
             form.style.width = "400px";
             form.style.margin = "auto";
             form.style.position = "relative";
@@ -64,91 +59,216 @@ view.Event.prototype.afficher = function (parent, action) {
                 height: "300px"
             };
 
-            var input_lastName = document.createElement("input");
-            input_lastName.setAttribute("id", "lastName");
-            input_lastName.setAttribute("autofocus", "autofocus");
-            input_lastName.setAttribute("placeholder", "Nom");
-            input_lastName.style.width = "300px";
-            input_lastName.style.height = "30px";
-            input_lastName.style.fontSize = "20px";
-            input_lastName.style.margin = "10px";
-            input_lastName.style.marginTop = "40px";
-            input_lastName.style.marginRight = "50px";
-            input_lastName.style.marginLeft = "50px";
-            input_lastName.style.position = "relative";
-            div.appendChild(input_lastName);
+            var db_clt = new drivers.DB("clients");
+            var clt = db_clt.getAll();
 
-            var input_firstName = document.createElement("input");
-            input_firstName.setAttribute("id", "firstName");
-            input_firstName.setAttribute("autofocus", "autofocus");
-            input_firstName.setAttribute("placeholder", "Prénom");
-            input_firstName.style.width = "300px";
-            input_firstName.style.height = "30px";
-            input_firstName.style.fontSize = "20px";
-            input_firstName.style.margin = "10px";
-            input_firstName.style.marginRight = "50px";
-            input_firstName.style.marginLeft = "50px";
-            div.appendChild(input_firstName);
+            var db_emp = new drivers.DB("employes");
+            var emp = db_emp.getAll();
 
-            var input_phone = document.createElement("input");
-            input_phone.setAttribute("id", "phone");
-            input_phone.setAttribute("autofocus", "autofocus");
-            input_phone.setAttribute("placeholder", "Téléphone");
-            input_phone.style.width = "300px";
-            input_phone.style.height = "30px";
-            input_phone.style.fontSize = "20px";
-            input_phone.style.margin = "10px";
-            input_phone.style.marginRight = "50px";
-            input_phone.style.marginLeft = "50px";
-            div.appendChild(input_phone);
 
-            var input_num_address = document.createElement("input");
-            input_num_address.setAttribute("id", "num_address");
-            input_num_address.setAttribute("autofocus", "autofocus");
-            input_num_address.setAttribute("placeholder", "N°");
-            input_num_address.style.width = "300px";
-            input_num_address.style.height = "30px";
-            input_num_address.style.fontSize = "20px";
-            input_num_address.style.margin = "10px";
-            input_num_address.style.marginRight = "50px";
-            input_num_address.style.marginLeft = "50px";
-            div.appendChild(input_num_address);
+            // Employé
+            var select_employe = document.createElement("select");
+            select_employe.setAttribute("id", "employe");
+            select_employe.style.width = "300px";
+            select_employe.style.height = "30px";
+            select_employe.style.fontSize = "20px";
+            select_employe.style.margin = "10px";
+            select_employe.style.marginRight = "50px";
+            select_employe.style.marginLeft = "50px";
+            div.appendChild(select_employe);
+            var option_employe = document.createElement("option");
+            option_employe.setAttribute("value", "-1");
+            option_employe.innerHTML = "Employé";
+            select_employe.appendChild(option_employe);
+            for(var i = 0 ; i < emp.length ; i++){
+                if(emp[i] != null){
+                    var option_employe = document.createElement("option");
+                    option_employe.setAttribute("value", i);
+                    option_employe.innerHTML = emp[i].nom + " " + emp[i].prenom;
+                    select_employe.appendChild(option_employe);
+                }
+            }
 
-            var input_address = document.createElement("input");
-            input_address.setAttribute("id", "address");
-            input_address.setAttribute("autofocus", "autofocus");
-            input_address.setAttribute("placeholder", "Adresse");
-            input_address.style.width = "300px";
-            input_address.style.height = "30px";
-            input_address.style.fontSize = "20px";
-            input_address.style.margin = "10px";
-            input_address.style.marginRight = "50px";
-            input_address.style.marginLeft = "50px";
-            div.appendChild(input_address);
 
-            var input_cp = document.createElement("input");
-            input_cp.setAttribute("id", "cp");
-            input_cp.setAttribute("autofocus", "autofocus");
-            input_cp.setAttribute("placeholder", "Code postal");
-            input_cp.style.width = "300px";
-            input_cp.style.height = "30px";
-            input_cp.style.fontSize = "20px";
-            input_cp.style.margin = "10px";
-            input_cp.style.marginRight = "50px";
-            input_cp.style.marginLeft = "50px";
-            div.appendChild(input_cp);
+            // Client
+            var select_client = document.createElement("select");
+            select_client.setAttribute("id", "client");
+            select_client.onchange = function(){
+                if(select_chien.style.display == "none")
+                    select_chien.style.display = "block";
+                var cid = select_client.value;
+                console.log(cid);
+                var db_dog = new drivers.DB("animaux");
+                var dogs = db_dog.getAll();
+                for(var i = 0 ; i < dogs.length ; i++){
+                    if(dogs[i] != null && dogs[i].cid == cid){
+                        var option_chien = document.createElement("option");
+                        option_chien.setAttribute("value", i);
+                        option_chien.innerHTML = dogs[i].nom;
+                        select_chien.appendChild(option_chien);
+                    }
+                }
+            }
+            select_client.style.width = "300px";
+            select_client.style.height = "30px";
+            select_client.style.fontSize = "20px";
+            select_client.style.margin = "10px";
+            select_client.style.marginRight = "50px";
+            select_client.style.marginLeft = "50px";
+            div.appendChild(select_client);
+            var option_client = document.createElement("option");
+            option_client.setAttribute("value", "-1");
+            option_client.innerHTML = "Client";
+            select_client.appendChild(option_client);
+            console.log(clt);
+            for(var i = 0 ; i < clt.length ; i++){
+                console.log(clt[i]);
+                if(clt[i] != null){
+                    var option_client = document.createElement("option");
+                    option_client.setAttribute("value", i);
+                    option_client.innerHTML = clt[i].nom + " " + clt[i].prenom;
+                    select_client.appendChild(option_client);
+                }
+            }
 
-            var input_city = document.createElement("input");
-            input_city.setAttribute("id", "city");
-            input_city.setAttribute("autofocus", "autofocus");
-            input_city.setAttribute("placeholder", "Ville");
-            input_city.style.width = "300px";
-            input_city.style.height = "30px";
-            input_city.style.fontSize = "20px";
-            input_city.style.margin = "10px";
-            input_city.style.marginRight = "50px";
-            input_city.style.marginLeft = "50px";
-            div.appendChild(input_city);
+
+            // Chien
+            var select_chien = document.createElement("select");
+            select_chien.setAttribute("id", "chien");
+            select_chien.style.width = "300px";
+            select_chien.style.height = "30px";
+            select_chien.style.fontSize = "20px";
+            select_chien.style.margin = "10px";
+            select_chien.style.marginRight = "50px";
+            select_chien.style.marginLeft = "50px";
+            select_chien.style.display = "none";
+            div.appendChild(select_chien);
+
+            var input_date = document.createElement("input");
+            input_date.setAttribute("id", "date");
+            input_date.setAttribute("placeholder", "Date JJ/MM/AAAA");
+            input_date.style.width = "300px";
+            input_date.style.height = "30px";
+            input_date.style.fontSize = "20px";
+            input_date.style.margin = "10px";
+            input_date.style.marginRight = "50px";
+            input_date.style.marginLeft = "50px";
+            div.appendChild(input_date);
+
+            // Heure début
+            var select_heure_debut = document.createElement("select");
+            select_heure_debut.setAttribute("id", "heure_debut");
+            select_heure_debut.style.width = "300px";
+            select_heure_debut.style.height = "30px";
+            select_heure_debut.style.fontSize = "20px";
+            select_heure_debut.style.margin = "10px";
+            select_heure_debut.style.marginRight = "50px";
+            select_heure_debut.style.marginLeft = "50px";
+            div.appendChild(select_heure_debut);
+            var option_heure_debut = document.createElement("option");
+            option_heure_debut.setAttribute("value", "-1");
+            option_heure_debut.innerHTML = "Heure du début";
+            select_heure_debut.appendChild(option_heure_debut);
+            for(var i = 9 ; i < 20 ; i++){
+                var option_heure_debut = document.createElement("option");
+                option_heure_debut.setAttribute("value", i);
+                option_heure_debut.innerHTML = i;
+                select_heure_debut.appendChild(option_heure_debut);
+            }
+
+            // Minute début
+            var select_minute_debut = document.createElement("select");
+            select_minute_debut.setAttribute("id", "minute_debut");
+            select_minute_debut.style.width = "300px";
+            select_minute_debut.style.height = "30px";
+            select_minute_debut.style.fontSize = "20px";
+            select_minute_debut.style.margin = "10px";
+            select_minute_debut.style.marginRight = "50px";
+            select_minute_debut.style.marginLeft = "50px";
+            div.appendChild(select_minute_debut);
+            var option_minute_debut = document.createElement("option");
+            option_minute_debut.setAttribute("value", "-1");
+            option_minute_debut.innerHTML = "Minute";
+            select_minute_debut.appendChild(option_minute_debut);
+            for(var i = 0 ; i <= 45 ; i = i+15){
+                var option_minute_debut = document.createElement("option");
+                var minutes = i;
+                if(i == 0)
+                    minutes = "00";
+
+                option_minute_debut.setAttribute("value", minutes);
+                option_minute_debut.innerHTML = minutes;
+                select_minute_debut.appendChild(option_minute_debut);
+            }
+
+            // Heure début
+            var select_heure_fin = document.createElement("select");
+            select_heure_fin.setAttribute("id", "heure_fin");
+            select_heure_fin.style.width = "300px";
+            select_heure_fin.style.height = "30px";
+            select_heure_fin.style.fontSize = "20px";
+            select_heure_fin.style.margin = "10px";
+            select_heure_fin.style.marginRight = "50px";
+            select_heure_fin.style.marginLeft = "50px";
+            div.appendChild(select_heure_fin);
+            var option_heure_fin = document.createElement("option");
+            option_heure_fin.setAttribute("value", "-1");
+            option_heure_fin.innerHTML = "Heure du fin";
+            select_heure_fin.appendChild(option_heure_fin);
+            for(var i = 9 ; i < 20 ; i++){
+                var option_heure_fin = document.createElement("option");
+                option_heure_fin.setAttribute("value", i);
+                option_heure_fin.innerHTML = i;
+                select_heure_fin.appendChild(option_heure_fin);
+            }
+
+            // Minute fin
+            var select_minute_fin = document.createElement("select");
+            select_minute_fin.setAttribute("id", "minute_fin");
+            select_minute_fin.style.width = "300px";
+            select_minute_fin.style.height = "30px";
+            select_minute_fin.style.fontSize = "20px";
+            select_minute_fin.style.margin = "10px";
+            select_minute_fin.style.marginRight = "50px";
+            select_minute_fin.style.marginLeft = "50px";
+            div.appendChild(select_minute_fin);
+            var option_minute_fin = document.createElement("option");
+            option_minute_fin.setAttribute("value", "-1");
+            option_minute_fin.innerHTML = "Minute";
+            select_minute_fin.appendChild(option_minute_fin);
+            for(var i = 0 ; i <= 45 ; i = i+15){
+                var option_minute_fin = document.createElement("option");
+                var minutes = i;
+                if(i == 0)
+                    minutes = "00";
+
+                option_minute_fin.setAttribute("value", minutes);
+                option_minute_fin.innerHTML = minutes;
+                select_minute_fin.appendChild(option_minute_fin);
+            }
+
+            // Type de créneau
+            var select_type = document.createElement("select");
+            select_type.setAttribute("id", "type");
+            select_type.style.width = "300px";
+            select_type.style.height = "30px";
+            select_type.style.fontSize = "20px";
+            select_type.style.margin = "10px";
+            select_type.style.marginRight = "50px";
+            select_type.style.marginLeft = "50px";
+            div.appendChild(select_type);
+            var option_type = document.createElement("option");
+            option_type.setAttribute("value", "-1");
+            option_type.innerHTML = "Type";
+            select_type.appendChild(option_type);
+            var option_type = document.createElement("option");
+            option_type.setAttribute("value", application.Creneau.type.EN_SALON);
+            option_type.innerHTML = "En salon";
+            select_type.appendChild(option_type);
+            var option_type = document.createElement("option");
+            option_type.setAttribute("value", application.Creneau.type.A_DOMICILE);
+            option_type.innerHTML = "A domicile";
+            select_type.appendChild(option_type);
 
             var input_submit = document.createElement("button");
             input_submit.setAttribute("id", "login-btn");
@@ -173,6 +293,7 @@ view.Event.prototype.afficher = function (parent, action) {
             div.appendChild(input_submit);
 
             form.appendChild(div);
+            return input_submit;
             break;
         case view.Event.action.DELETE:
             // Si on souhaite supprimer un évènement
