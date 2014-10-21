@@ -166,31 +166,33 @@ drivers.Database.Conditions.NEQ = function (field, value) {
 drivers.Database.prototype.atomicSearchItem = function (cdt) {
     ret = [];
     this.datas.forEach(function (a, b, c) {
-        switch (cdt.getType()) {
-            case drivers.Database.Conditions.type.EQ:
-                if (a[cdt.getData().field] === cdt.getData().value)
-                    ret.push(a);
-                break;
-            case drivers.Database.Conditions.type.NEQ:
-                if (a[cdt.getData().field] !== cdt.getData().value)
-                    ret.push(a);
-                break;
-            case drivers.Database.Conditions.type.LT:
-                if (a[cdt.getData().field] <= cdt.getData().value)
-                    ret.push(a);
-                break;
-            case drivers.Database.Conditions.type.GT:
-                if (a[cdt.getData().field] >= cdt.getData().value)
-                    ret.push(a);
-                break;
-            case drivers.Database.Conditions.type.SLT:
-                if (a[cdt.getData().field] < cdt.getData().value)
-                    ret.push(a);
-                break;
-            case drivers.Database.Conditions.type.SGT:
-                if (a[cdt.getData().field] > cdt.getData().value)
-                    ret.push(a);
-                break;
+        if (a != null) {
+            switch (cdt.getType()) {
+                case drivers.Database.Conditions.type.EQ:
+                    if (a[cdt.getData().field] === cdt.getData().value)
+                        ret.push(a);
+                    break;
+                case drivers.Database.Conditions.type.NEQ:
+                    if (a[cdt.getData().field] !== cdt.getData().value)
+                        ret.push(a);
+                    break;
+                case drivers.Database.Conditions.type.LT:
+                    if (a[cdt.getData().field] <= cdt.getData().value)
+                        ret.push(a);
+                    break;
+                case drivers.Database.Conditions.type.GT:
+                    if (a[cdt.getData().field] >= cdt.getData().value)
+                        ret.push(a);
+                    break;
+                case drivers.Database.Conditions.type.SLT:
+                    if (a[cdt.getData().field] < cdt.getData().value)
+                        ret.push(a);
+                    break;
+                case drivers.Database.Conditions.type.SGT:
+                    if (a[cdt.getData().field] > cdt.getData().value)
+                        ret.push(a);
+                    break;
+            }
         }
     });
     return ret;
