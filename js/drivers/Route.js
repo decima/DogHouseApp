@@ -24,7 +24,7 @@ drivers.Route.prototype.assignRoute = function (path, action) {
         this.routes.fixed["HOME"] = action;
     }
     else if (path1.match(/\{[a-zA-Z0-9_]+\}/g) !== null) {
-        var path2 = path1.replace(/{[a-zA-Z0-9-_]+\}/, "_var");
+        var path2 = path1.replace(/{[a-zA-Z0-9-_]+\}/g, "_var");
         this.routes.variables[path2] = action;
     } else {
         path2 = path1.replace(/{[a-zA-Z0-9_]+\}/, "_var");
