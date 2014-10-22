@@ -36,7 +36,7 @@ application.Routes = {
     },
     "/add-event/{date}": function (date) {
         page = new view.Event(date);
-        var btn = page.afficher("subpage", view.Event.action.ADD);
+        var btn = page.afficher("subpage", view.Event.action.ADD,date);
         btn.addEventListener("click", function () {
             var employe = document.getElementById("employe").value;
             var client = document.getElementById("client").value;

@@ -32,10 +32,6 @@ view.Main.prototype.afficher = function (parent) {
     accueil.innerHTML = "Accueil";
     bandeau_milieu.appendChild(accueil);
 
-    var add_event = document.createElement("div");
-    add_event.setAttribute("onclick", "changePage(\"add-event/2014-10-18\", \"subpage\");");
-    add_event.innerHTML = "Ajouter un créneau";
-    bandeau_milieu.appendChild(add_event);
 
 
     var list_client = document.createElement("div");

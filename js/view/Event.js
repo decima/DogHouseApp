@@ -153,6 +153,7 @@ view.Event.prototype.afficher = function (parent, action) {
             input_date.style.margin = "10px";
             input_date.style.marginRight = "50px";
             input_date.style.marginLeft = "50px";
+            input_date.value=arguments[2];
             div.appendChild(input_date);
 
             // Heure début
