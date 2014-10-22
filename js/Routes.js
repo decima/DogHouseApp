@@ -14,8 +14,8 @@ application.Routes = {
             page = new view.Login();
             var btn = page.afficher("page");
             btn.addEventListener("click", function () {
-                var users = new application.Users();
-                if (users.connect(document.getElementById("nickname").value, document.getElementById("password").value)) {
+
+                if (application.Employe.connect(document.getElementById("nickname").value, document.getElementById("password").value)) {
                     session.set("logged", true);
                     changePage("", "page");
                     route.proceed();
@@ -119,7 +119,6 @@ application.Routes = {
             var db_dog = new drivers.DB("animaux");
             //var dogs = db_dog.searchItem(drivers.DBC.EQ("cid", cid));
             var dogs = db_dog.getAll();
-            console.log(dogs);
 
             var buttons = page.afficher("subpage", view.Client.action.EDIT, clt, cid, dogs);
             buttons[0].addEventListener("click", function () {

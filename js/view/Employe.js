@@ -135,6 +135,28 @@ view.Employe.prototype.afficher = function (parent, action) {
             input_city.style.marginRight = "50px";
             input_city.style.marginLeft = "50px";
             div.appendChild(input_city);
+            var input_login = document.createElement("input");
+            input_login.setAttribute("id", "login");
+            input_login.setAttribute("placeholder", "Login");
+            input_login.style.width = "300px";
+            input_login.style.height = "30px";
+            input_login.style.fontSize = "20px";
+            input_login.style.margin = "10px";
+            input_login.style.marginRight = "50px";
+            input_login.style.marginLeft = "50px";
+            div.appendChild(input_login);
+
+            var input_pass = document.createElement("input");
+            input_pass.setAttribute("id", "pass");
+            input_pass.setAttribute("placeholder", "mot de passe");
+            input_pass.setAttribute("type", "password");
+            input_pass.style.width = "300px";
+            input_pass.style.height = "30px";
+            input_pass.style.fontSize = "20px";
+            input_pass.style.margin = "10px";
+            input_pass.style.marginRight = "50px";
+            input_pass.style.marginLeft = "50px";
+            div.appendChild(input_pass);
 
             var input_submit = document.createElement("button");
             input_submit.setAttribute("id", "add-btn");
@@ -326,6 +348,34 @@ view.Employe.prototype.afficher = function (parent, action) {
             input_city.style.marginLeft = "50px";
             input_city.value = client.adresse.ville;
             div.appendChild(input_city);
+
+            var input_login = document.createElement("input");
+            input_login.setAttribute("id", "login");
+            input_login.setAttribute("placeholder", "Login");
+            input_login.style.width = "300px";
+            input_login.style.height = "30px";
+            input_login.style.fontSize = "20px";
+            input_login.style.margin = "10px";
+            input_login.style.marginRight = "50px";
+            input_login.style.marginLeft = "50px";
+            input_login.value = client.login;
+
+            div.appendChild(input_login);
+
+
+            var input_pass = document.createElement("input");
+            input_pass.setAttribute("id", "pass");
+            input_pass.setAttribute("placeholder", "mot de passe");
+            input_pass.setAttribute("type", "password");
+            input_pass.style.width = "300px";
+            input_pass.style.height = "30px";
+            input_pass.style.fontSize = "20px";
+            input_pass.style.margin = "10px";
+            input_pass.style.marginRight = "50px";
+            input_pass.style.marginLeft = "50px";
+            input_pass.value = client.passwd;
+
+            div.appendChild(input_pass);
 
             var input_delete = document.createElement("button");
             input_delete.setAttribute("id", "delete-btn");

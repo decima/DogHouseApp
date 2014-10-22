@@ -16,10 +16,20 @@ var session = new drivers.Session();
 window.onload = function () {
     //drivers.DB.sampleSearch(true);
 
-    var t = new drivers.DB("users");
+    var t = new drivers.DB("employes");
     if (t.getAll().length < 1) {
         createData();
+    } else {
+        var e = t.getAll();
+        if(e[0]==null){
+            createData();
+        }
+        if (typeof (e[0].passwd) == "undefined") {
+            createData();
+
+        }
     }
+
 
     if (DEBUG_MODE) {
         var btn_refresh = document.createElement("button");
@@ -48,8 +58,24 @@ function dbtest() {
 }
 
 function createData() {
-    var users = new application.Users();
-    users.create("henri", "123456", application.Users.roles.EMPLOYE);
-    users.create("florent", "654321", application.Users.roles.EMPLOYE);
-    users.create("admin", "pass", application.Users.roles.RESPONSABLE);
+        var db_clt = new drivers.DB("employes");
+db_clt.destroy();
+    var a = new application.Employe({
+        nom: "larget",
+        prenom: "henri",
+        telephone: "0123456789",
+        login: "hlarget",
+        password: "123456"
+    });
+    var b = new application.Employe({
+        nom: "peysson",
+        prenom: "florent",
+        telephone: "0987654321",
+        login: "fpeysson",
+        password: "654321"
+    });
+    db_clt.addItem(a);
+    db_clt.addItem(b);
+
+
 }

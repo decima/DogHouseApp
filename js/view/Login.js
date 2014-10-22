@@ -41,7 +41,7 @@ view.Login.prototype.afficher = function (parent) {
     input_login.setAttribute("id", "nickname");
     input_login.setAttribute("autofocus", "autofocus");
 
-    input_login.value = "florent";
+    input_login.value = "hlarget";
 
     input_login.setAttribute("placeholder", "Votre identifiant");
     input_login.style.width = "300px";
@@ -57,7 +57,7 @@ view.Login.prototype.afficher = function (parent) {
     input_pass.style.width = "300px";
     input_pass.style.height = "30px";
 
-    input_pass.value = "654321";
+    input_pass.value = "123456";
 
     input_pass.style.fontSize = "20px";
     input_pass.style.marginLeft = "50px";
