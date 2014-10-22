@@ -49,22 +49,22 @@ application.Routes = {
             var type = document.getElementById("type").value;
 
             /*
-            var db_dog = new drivers.DB("animaux");
-            var dog = db_dog.getItem(chien);
-
-            var db_clt = new drivers.DB("clients");
-            var clt = db_clt.getItem(client);
-
-            var db_emp = new drivers.DB("employes");
-            var emp = db_emp.getItem(employe);
-            */
+             var db_dog = new drivers.DB("animaux");
+             var dog = db_dog.getItem(chien);
+             
+             var db_clt = new drivers.DB("clients");
+             var clt = db_clt.getItem(client);
+             
+             var db_emp = new drivers.DB("employes");
+             var emp = db_emp.getItem(employe);
+             */
             var dog = chien;
             var clt = client;
             var emp = employe;
 
             if (employe != "" && client != "" && chien != "" && date != "" && heure_debut != "" && minute_debut != "" && heure_fin != "" && minute_fin != "" && type != "") {
                 var db_cre = new drivers.DB("creneaux");
-                var cre = new application.Creneau({heure: {debut: heure_debut+":"+minute_debut, fin: heure_fin+":"+minute_fin}, date: date, type: type, client: clt, animal: dog, toiletteur: emp});
+                var cre = new application.Creneau({heure: {debut: heure_debut + ":" + minute_debut, fin: heure_fin + ":" + minute_fin}, date: date, type: type, client: clt, animal: dog, toiletteur: emp});
                 db_cre.addItem(cre);
                 changePage("/", "page");
             }
@@ -73,7 +73,7 @@ application.Routes = {
             }
         });
     },
-    "/delete-event/{cid}/{eid}": function (cid,eid) {
+    "/delete-event/{cid}/{eid}": function (cid, eid) {
 
     },
     "/delete-all-dogs": function () {
@@ -148,7 +148,7 @@ application.Routes = {
             });
             buttons[2].addEventListener("click", function () {
                 // Ajouter un chien
-                changePage("/clients/edit/"+cid+"/add_animal", "subpage");
+                changePage("/clients/edit/" + cid + "/add_animal", "subpage");
             });
         }
     },
@@ -166,7 +166,7 @@ application.Routes = {
                 var db_dog = new drivers.DB("animaux");
                 var dog = new application.Animal({cid: "" + cid + "", nom: "" + nom + "", sexe: "" + sexe + "", race: "" + race + "", gabarit: "" + gabarit + ""});
                 db_dog.addItem(dog);
-                changePage("/clients/edit/"+cid, "subpage");
+                changePage("/clients/edit/" + cid, "subpage");
             }
             else {
                 alert("Informations incomplètes !");
@@ -221,11 +221,13 @@ application.Routes = {
             var adresse = document.getElementById("address").value;
             var cp = document.getElementById("cp").value;
             var ville = document.getElementById("city").value;
-
-            if (nom != "" && prenom != "" && tel != "") {
+            var login = document.getElementById("login").value;
+            var pass = document.getElementById("pass").value;
+            if (nom != "" && prenom != "" && tel != "" && login != "" && pass != "") {
                 var db_clt = new drivers.DB("employes");
-                var clt = new application.Employe({nom: "" + nom + "", prenom: "" + prenom + "", telephone: "" + tel + "", rue: "" + adresse + "", ville: "" + ville + "", cp: "" + cp + ""});
+                var clt = new application.Employe({nom: "" + nom + "", prenom: "" + prenom + "", telephone: "" + tel + "", rue: "" + adresse + "", ville: "" + ville + "", cp: "" + cp + "", login: "" + login + "", password: "" + pass + ""});
                 db_clt.addItem(clt);
+                console.log(clt);
                 changePage("/employes", "subpage");
             }
             else {
@@ -243,17 +245,17 @@ application.Routes = {
         } else {
             var buttons = page.afficher("subpage", view.Employe.action.EDIT, clt);
             buttons[0].addEventListener("click", function () {
-                // Modifier
-                var nom = document.getElementById("lastName").value;
+                // Modifier                 var nom = document.getElementById("lastName").value;
                 var prenom = document.getElementById("firstName").value;
                 var tel = document.getElementById("phone").value;
                 var adresse = document.getElementById("address").value;
                 var cp = document.getElementById("cp").value;
                 var ville = document.getElementById("city").value;
-
-                if (nom != "" && prenom != "" && tel != "") {
+                var login = document.getElementById("login").value;
+                var pass = document.getElementById("pass").value;
+                if (nom != "" && prenom != "" && tel != "" && login != "" && pass != "") {
                     var db_clt = new drivers.DB("employes");
-                    var clt = new application.Employe({nom: "" + nom + "", prenom: "" + prenom + "", telephone: "" + tel + "", rue: "" + adresse + "", ville: "" + ville + "", cp: "" + cp + ""});
+                    var clt = new application.Employe({nom: "" + nom + "", prenom: "" + prenom + "", telephone: "" + tel + "", rue: "" + adresse + "", ville: "" + ville + "", cp: "" + cp + "", login: "" + login + "", password: "" + pass + ""});
                     db_clt.replaceItem(cid, clt);
                     changePage("/employes", "subpage");
                 }
