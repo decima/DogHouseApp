@@ -19,7 +19,7 @@ window.onload = function () {
     var t = new drivers.DB("employes");
     if (t.getAll().length < 1) {
         createData();
-    } else {
+    } /*else {
         var e = t.getAll();
         if(e[0]==null){
             createData();
@@ -28,7 +28,7 @@ window.onload = function () {
             createData();
 
         }
-    }
+    }*/
 
 
     if (DEBUG_MODE) {
