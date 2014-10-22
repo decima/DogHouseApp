@@ -110,7 +110,9 @@ application.Routes = {
         }
         else {
             var db_dog = new drivers.DB("animaux");
-            var dogs = db_dog.searchItem(drivers.DBC.EQ("cid", cid));
+            //var dogs = db_dog.searchItem(drivers.DBC.EQ("cid", cid));
+            var dogs = db_dog.getAll();
+            console.log(dogs);
 
             var buttons = page.afficher("subpage", view.Client.action.EDIT, clt, cid, dogs);
             buttons[0].addEventListener("click", function () {

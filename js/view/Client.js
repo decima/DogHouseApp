@@ -351,7 +351,7 @@ view.Client.prototype.afficher = function (parent, action) {
                     var cid = arguments[3];
                     var tableau = "<table>";
                     for(var i = 0 ; i < dogs.length ; i++){
-                        if(dogs[i] != null){
+                        if(dogs[i] != null && dogs[i].cid == cid){
                             tableau += "<tr>";
                             tableau += "<td>"+dogs[i].nom+"</td>";
                             tableau += "<td onclick='changePage(\"clients/edit/"+cid+"/edit_animal/"+i+"\", \"subpage\");'><button>Modifier</button></td>";

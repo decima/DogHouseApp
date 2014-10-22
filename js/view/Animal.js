@@ -280,7 +280,7 @@ view.Animal.prototype.afficher = function (parent, action) {
             input_delete.style.cursor = "pointer";
             input_delete.style.marginTop = "20px";
             input_delete.style.position = "relative";
-            input_delete.style.bottom = "-1px";
+            input_delete.style.bottom = "-2px";
             input_delete.style.left = "0px";
             input_delete.style.border = "0px";
             div.appendChild(input_delete);
