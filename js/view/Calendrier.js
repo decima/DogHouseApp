@@ -32,9 +32,12 @@ view.Calendrier = function (creneaux) {
     oThis.creneaux = creneaux;
     // On récupère le nombre d'employés
     oThis.employes = [];
+    var db_emp = new drivers.DB("employes");
+    var emp = db_emp.getAll();
+
     this.creneaux.forEach(function(c){
-        if (!oThis.employes.inArray(c.toiletteur.nom))
-            oThis.employes.push(c.toiletteur.nom);
+        if (!oThis.employes.inArray(emp[c.toiletteur].nom))
+            oThis.employes.push(emp[c.toiletteur].nom);
     });
 
     oThis.nb_employes = oThis.employes.length;
@@ -43,7 +46,7 @@ view.Calendrier = function (creneaux) {
         oThis.creneaux_par_employe[i] = [];
     }
     oThis.creneaux.forEach(function(c){
-        oThis.creneaux_par_employe[oThis.employes.indexOf(c.toiletteur.nom)].push(c);
+        oThis.creneaux_par_employe[oThis.employes.indexOf(emp[c.toiletteur].nom)].push(c);
     });
 };
 
@@ -96,6 +99,7 @@ view.Calendrier.prototype = {
                 tableau += "<tbody>";
                     tableau += "<thead>";
                         tableau += "<td></td>";
+                        console.log()
                         for (var i = 0 ; i < oThis.employes.length ; i++) {
                             tableau += "<td>"+oThis.employes[i]+"</td>";
                         }
