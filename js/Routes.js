@@ -74,7 +74,27 @@ application.Routes = {
         });
     },
     "/delete-event/{cid}/{eid}": function (cid, eid) {
+        var db_evt = new drivers.DB("creneaux");
+        var events = db_evt.getAll();
 
+        // On récupère l'id de l'event dans le tableau
+        var event_id = 0;
+        var temp_id = 0;
+        for(var i = 0 ; i < events.length ; i++) {
+            if(events[i] != null) {
+                if(events[i].toiletteur == cid){
+                    temp_id++;
+                    if(temp_id == eid) {
+                        event_id = i;
+                        break;
+                    }
+                }
+            }
+        }
+        db_evt.removeItem(event_id);
+        page = new view.Main();
+        changePage("", "page");
+        page.afficher("page");
     },
     "/delete-all-dogs": function () {
         var db_dog = new drivers.DB("animaux");
