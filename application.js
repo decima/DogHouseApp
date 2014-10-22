@@ -1,16 +1,17 @@
 var DEBUG_MODE = window.location.search.toLowerCase() == "?debug";
+var route = new drivers.Route();
+
 var changePage = function (url) {
     if (arguments[1] != "undefined") {
 
         var parent_element = document.getElementById(arguments[1]);
-            parent_element.innerHTML = "";
+        parent_element.innerHTML = "";
     }
     window.location.hash = url;
 };
 drivers.Route.prototype.connected_function = function () {
     return session.get("logged", false);
 };
-var route = new drivers.Route();
 var session = new drivers.Session();
 window.onload = function () {
     //drivers.DB.sampleSearch(true);

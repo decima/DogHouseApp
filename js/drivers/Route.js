@@ -86,10 +86,13 @@ drivers.Route.prototype.proceed = function () {
 
 drivers.Route.prototype.enableProceedEvent = function () {
     var o_this = this;
+    var fnc = function () {
+        o_this.proceed();
+    };
     if (drivers.Route.listener === null) {
-        drivers.Route.listener = window.addEventListener("hashchange", function () {
-            o_this.proceed();
-        }, false);
+        drivers.Route.listener = fnc;
+        fnc();
+        window.addEventListener("hashchange", fnc, false);
     }
 };
 

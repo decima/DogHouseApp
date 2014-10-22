@@ -146,7 +146,7 @@ view.Event.prototype.afficher = function (parent, action) {
 
             var input_date = document.createElement("input");
             input_date.setAttribute("id", "date");
-            input_date.setAttribute("placeholder", "Date JJ/MM/AAAA");
+            input_date.setAttribute("placeholder", "Date AAAA-MM-JJ");
             input_date.style.width = "300px";
             input_date.style.height = "30px";
             input_date.style.fontSize = "20px";

@@ -13,13 +13,13 @@ if (typeof (view) === "undefined") {
  */
 view.Calendar = function (date) {
     var oThis = this;
-    if(date != null) {
+    if (date != null) {
         oThis.date = date;
     }
     else {
         // on crée la date du jour
         var d = new Date();
-        oThis.date = d.getFullYear() +"-"+ (d.getMonth()+1) +"-"+ d.getDate();
+        oThis.date = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
     }
 };
 
@@ -28,8 +28,12 @@ view.Calendar.prototype.afficher = function (parent) {
     var cal = document.createElement("div");
     parent_element.appendChild(cal);
     // On part chercher les données en base de données
-
+    var db_cre = new drivers.DB("creneaux");
+    console.log(this.date);
+    creneaux = db_cre.searchItem(drivers.DBC.EQ("date", this.date));
+    console.log(creneaux);
     // On affiche le calendrier
-
+    var calendrier = new view.Calendrier(creneaux);
+    calendrier.afficher(parent);
     return true;
 };

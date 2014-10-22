@@ -8,6 +8,8 @@ application.Routes = {
             page = new view.Main();
             changePage("", "page");
             page.afficher("page");
+            var cal = new view.Calendar(null);
+            cal.afficher("subpage");
         } else {
             page = new view.Login();
             var btn = page.afficher("page");

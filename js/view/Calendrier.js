@@ -3,8 +3,8 @@
  * @class Calendrier
  */
 
-if (typeof (application) === "undefined") {
-    var application = {};
+if (typeof (view) === "undefined") {
+    var view = {};
 }
 
 /**
@@ -27,7 +27,7 @@ Array.prototype.inArray = function (needle) {
  * @param rdv Array of Creneau
  * @constructor
  */
-application.Calendrier = function (creneaux) {
+view.Calendrier = function (creneaux) {
     var oThis = this;
     oThis.creneaux = creneaux;
     // On récupère le nombre d'employés
@@ -47,7 +47,7 @@ application.Calendrier = function (creneaux) {
     });
 };
 
-application.Calendrier.prototype = {
+view.Calendrier.prototype = {
     afficher:function(parent){
         var oThis = this;
         var parent_element = document.getElementById(parent);
@@ -72,9 +72,9 @@ application.Calendrier.prototype = {
                     for (var j = 0 ; j < c_par_e[i].length ; j++){      // Pour chaque créneau de cet employé
                         //console.log(i_heure_debut);
                         //console.log("["+i+"]["+j+"] : "+creneau_ouvert[i]+" | "+c_par_e[i][j].okTime(i_heure_debut) + " | " +c_par_e[i][j].isLastQuarter(i_heure_debut));
-                        if(c_par_e[i][j].okTime(i_heure_debut)) {      // Si la tranche horaire est dans le créneau
+                        if(application.Creneau.okTime(c_par_e[i][j],i_heure_debut)) {      // Si la tranche horaire est dans le créneau
                             ligne[i]["creneau"] = c_par_e[i][j];
-                            if(c_par_e[i][j].isLastQuarter(i_heure_debut)) {
+                            if(application.Creneau.isLastQuarter(c_par_e[i][j],i_heure_debut)) {
                                 ligne[i]["occupe"] = 3;
                                 creneau_ouvert[i] = 0;
                             }
@@ -104,12 +104,12 @@ application.Calendrier.prototype = {
                     for (var i = 0 ; i < edt.length ; i++) {
                         tableau += "<tr>";
                             var ligne = edt[i];
-                            tableau += "<td class='heure'>"+heure+"</td>";
+                            tableau += "<td class='heure'>"+(heure.split(":")[1]==15||heure.split(":")[1]==45?"":heure)+"</td>";
                             for (var j = 0 ; j < ligne.length ; j++) {
                                 tableau += "<td class='creneau"
                                 if(ligne[j]["creneau"] != null) {
-                                    console.log(ligne[j]["creneau"]);
-                                    console.log("Type : "+ligne[j]["creneau"].type+ " | Salon : "+application.Creneau.type.EN_SALON+ " | Salon : "+application.Creneau.type.A_DOMICILE);
+                                    //console.log(ligne[j]["creneau"]);
+                                    //console.log("Type : "+ligne[j]["creneau"].type+ " | Salon : "+application.Creneau.type.EN_SALON+ " | Salon : "+application.Creneau.type.A_DOMICILE);
                                     if (ligne[j]["creneau"].type == application.Creneau.type.EN_SALON) {
                                         tableau += " creneau_salon";
                                     }
