@@ -132,8 +132,40 @@ view.Calendrier.prototype = {
                                     }
                                 }
                                 tableau += "'>";
-                                if(ligne[j]["occupe"] == 3){
-                                    tableau += ligne[j]["creneau"].client.nom + " : " + ligne[j]["creneau"].animal.nom;
+                                if(ligne[j]["occupe"] == 1){
+                                    // On ajoute le bouton Supprimer
+                                    var div_suppr = document.createElement("div");
+                                    div_suppr.addEventListener("click", function () {
+                                        changePage("/delete-event/"+cid+"/"+j, "subpage");
+                                    });
+                                    div_suppr.setAttribute("id", "delete-btn-"+j);
+                                    div_suppr.setAttribute("title", "supprimer");
+                                    var text_delete = document.createTextNode("✘");
+                                    div_suppr.appendChild(text_delete);
+                                    div_suppr.style.width = "20%";
+                                    div_suppr.style.height = "100%";
+                                    div_suppr.style.fontSize = "25px";
+                                    div_suppr.style.background = "#e74c3c";
+                                    div_suppr.style.color = "white";
+                                    div_suppr.style.cursor = "pointer";
+                                    div_suppr.style.marginTop = "20px";
+                                    div_suppr.style.position = "relative";
+                                    div_suppr.style.bottom = "-1px";
+                                    div_suppr.style.left = "0px";
+                                    div_suppr.style.border = "0px";
+
+                                    tableau += div_suppr;
+                                }
+                                else if(ligne[j]["occupe"] == 3){
+                                    // On affiche les informations
+                                    var db_dog = new drivers.DB("animaux");
+                                    var dog = db_dog.getItem(ligne[j]["creneau"].animal);
+
+                                    var db_clt = new drivers.DB("clients");
+                                    var clt = db_clt.getItem(ligne[j]["creneau"].client);
+
+                                    //tableau += ligne[j]["creneau"].client.nom + " : " + ligne[j]["creneau"].animal.nom;
+                                    tableau += clt.nom + " : " + dog.nom;
                                 }
                                 tableau += "</td>";
                             }

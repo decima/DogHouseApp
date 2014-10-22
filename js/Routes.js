@@ -48,6 +48,7 @@ application.Routes = {
             var minute_fin = document.getElementById("minute_fin").value;
             var type = document.getElementById("type").value;
 
+            /*
             var db_dog = new drivers.DB("animaux");
             var dog = db_dog.getItem(chien);
 
@@ -56,6 +57,10 @@ application.Routes = {
 
             var db_emp = new drivers.DB("employes");
             var emp = db_emp.getItem(employe);
+            */
+            var dog = chien;
+            var clt = client;
+            var emp = employe;
 
             if (employe != "" && client != "" && chien != "" && date != "" && heure_debut != "" && minute_debut != "" && heure_fin != "" && minute_fin != "" && type != "") {
                 var db_cre = new drivers.DB("creneaux");
@@ -68,7 +73,7 @@ application.Routes = {
             }
         });
     },
-    "/delete-event/{id}": function (eid) {
+    "/delete-event/{cid}/{eid}": function (cid,eid) {
 
     },
     "/delete-all-dogs": function () {
