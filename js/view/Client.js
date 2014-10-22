@@ -175,6 +175,10 @@ view.Client.prototype.afficher = function (parent, action) {
             titre.style.paddingTop = "20px";
             form.appendChild(titre);
 
+    var add_client = document.createElement("button");
+    add_client.setAttribute("onclick", "changePage(\"clients/add\", \"subpage\");");
+    add_client.innerHTML = "Ajouter un client";
+    form.appendChild(add_client);
             form.setAttribute("class", "list_clients");
             form.style.width = "400px";
             form.style.margin = "auto";
@@ -195,7 +199,7 @@ view.Client.prototype.afficher = function (parent, action) {
                         tableau += "<tr>";
                         tableau += "<td>"+liste_clients[i].nom+"</td>";
                         tableau += "<td>"+liste_clients[i].prenom+"</td>";
-                        tableau += "<td onclick='changePage(\"clients/edit/"+i+"\", \"subpage\");'>Modifier</td>";
+                        tableau += "<td onclick='changePage(\"clients/edit/"+i+"\", \"subpage\");'><button>Modifier</button></td>";
                         tableau += "</tr>";
                     }
                 }
@@ -350,7 +354,7 @@ view.Client.prototype.afficher = function (parent, action) {
                         if(dogs[i] != null){
                             tableau += "<tr>";
                             tableau += "<td>"+dogs[i].nom+"</td>";
-                            tableau += "<td onclick='changePage(\"clients/edit/"+cid+"/edit_animal/"+i+"\", \"subpage\");'>Modifier</td>";
+                            tableau += "<td onclick='changePage(\"clients/edit/"+cid+"/edit_animal/"+i+"\", \"subpage\");'><button>Modifier</button></td>";
                             tableau += "</tr>";
                         }
                     }

@@ -13,10 +13,10 @@ if (typeof (view) === "undefined") {
 view.Employe = function () {
 
 };
-view.Employe.action={
-    ADD:1,
-    EDIT:3,
-    LIST:4,
+view.Employe.action = {
+    ADD: 1,
+    EDIT: 3,
+    LIST: 4,
 };
 
 view.Employe.prototype.afficher = function (parent, action) {
@@ -30,6 +30,7 @@ view.Employe.prototype.afficher = function (parent, action) {
             parent_element.style.background = "#2c3e50";
             var titre = document.createElement("div");
             titre.innerHTML = "Ajouter un Employé";
+
             titre.style.margin = "auto";
             titre.style.color = "#2c3e50";
             titre.style.fontSize = "28px";
@@ -89,18 +90,18 @@ view.Employe.prototype.afficher = function (parent, action) {
             div.appendChild(input_phone);
 
             /*
-            var input_num_address = document.createElement("input");
-            input_num_address.setAttribute("id", "num_address");
-            input_num_address.setAttribute("autofocus", "autofocus");
-            input_num_address.setAttribute("placeholder", "N°");
-            input_num_address.style.width = "300px";
-            input_num_address.style.height = "30px";
-            input_num_address.style.fontSize = "20px";
-            input_num_address.style.margin = "10px";
-            input_num_address.style.marginRight = "50px";
-            input_num_address.style.marginLeft = "50px";
-            div.appendChild(input_num_address);
-            */
+             var input_num_address = document.createElement("input");
+             input_num_address.setAttribute("id", "num_address");
+             input_num_address.setAttribute("autofocus", "autofocus");
+             input_num_address.setAttribute("placeholder", "N°");
+             input_num_address.style.width = "300px";
+             input_num_address.style.height = "30px";
+             input_num_address.style.fontSize = "20px";
+             input_num_address.style.margin = "10px";
+             input_num_address.style.marginRight = "50px";
+             input_num_address.style.marginLeft = "50px";
+             div.appendChild(input_num_address);
+             */
 
             var input_address = document.createElement("input");
             input_address.setAttribute("id", "address");
@@ -162,6 +163,7 @@ view.Employe.prototype.afficher = function (parent, action) {
             break;
         case view.Employe.action.LIST:
             var form = document.createElement("div");
+
             parent_element.appendChild(form);
             parent_element.style.background = "#2c3e50";
             var titre = document.createElement("div");
@@ -173,6 +175,10 @@ view.Employe.prototype.afficher = function (parent, action) {
             titre.style.fontWeight = "600";
             titre.style.paddingTop = "20px";
             form.appendChild(titre);
+            var add_employes = document.createElement("button");
+            add_employes.setAttribute("onclick", "changePage(\"employes/add\", \"subpage\");");
+            add_employes.innerHTML = "Ajouter un employé";
+            form.appendChild(add_employes);
 
             form.setAttribute("class", "list_clients");
             form.style.width = "400px";
@@ -189,15 +195,15 @@ view.Employe.prototype.afficher = function (parent, action) {
 
             var liste_clients = arguments[2];
             var tableau = "<table>";
-                for(var i = 0 ; i < liste_clients.length ; i++){
-                    if(liste_clients[i] != null){
-                        tableau += "<tr>";
-                        tableau += "<td>"+liste_clients[i].nom+"</td>";
-                        tableau += "<td>"+liste_clients[i].prenom+"</td>";
-                        tableau += "<td onclick='changePage(\"employes/edit/"+i+"\", \"subpage\");'>Modifier</td>";
-                        tableau += "</tr>";
-                    }
+            for (var i = 0; i < liste_clients.length; i++) {
+                if (liste_clients[i] != null) {
+                    tableau += "<tr>";
+                    tableau += "<td>" + liste_clients[i].nom + "</td>";
+                    tableau += "<td>" + liste_clients[i].prenom + "</td>";
+                    tableau += "<td onclick='changePage(\"employes/edit/" + i + "\", \"subpage\");'><button>Modifier</button></td>";
+                    tableau += "</tr>";
                 }
+            }
             tableau += "</table>";
             div.innerHTML = tableau;
 

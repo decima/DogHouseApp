@@ -25,13 +25,10 @@ view.Main.prototype.afficher = function (parent) {
     title.style.marginTop = "0px";
     bandeau_milieu.appendChild(title);
 
-    var deconnexion = document.createElement("div");
-    deconnexion.setAttribute("onclick", "changePage(\"logout\", \"page\");");
-    deconnexion.innerHTML = "Déconnexion";
-    bandeau_milieu.appendChild(deconnexion);
+    
 
     var accueil = document.createElement("div");
-    accueil.setAttribute("onclick", "changePage(\"\", \"page\");");
+    accueil.setAttribute("onclick", "changePage(\"\", \"subpage\");");
     accueil.innerHTML = "Accueil";
     bandeau_milieu.appendChild(accueil);
 
@@ -40,25 +37,23 @@ view.Main.prototype.afficher = function (parent) {
     add_event.innerHTML = "Ajouter un créneau";
     bandeau_milieu.appendChild(add_event);
 
-    var add_client = document.createElement("div");
-    add_client.setAttribute("onclick", "changePage(\"clients/add\", \"subpage\");");
-    add_client.innerHTML = "Ajouter un client";
-    bandeau_milieu.appendChild(add_client);
 
     var list_client = document.createElement("div");
     list_client.setAttribute("onclick", "changePage(\"clients\", \"subpage\");");
-    list_client.innerHTML = "Liste des clients";
+    list_client.innerHTML = "Clients";
     bandeau_milieu.appendChild(list_client);
 
     var list_employes = document.createElement("div");
     list_employes.setAttribute("onclick", "changePage(\"employes\", \"subpage\");");
-    list_employes.innerHTML = "Liste des employés";
+    list_employes.innerHTML = "Employés";
     bandeau_milieu.appendChild(list_employes);
     parent_element.appendChild(header);
-    var add_employes = document.createElement("div");
-    add_employes.setAttribute("onclick", "changePage(\"employes/add\", \"subpage\");");
-    add_employes.innerHTML = "Ajouter un employé";
-    bandeau_milieu.appendChild(add_employes);
+   
+    var deconnexion = document.createElement("div");
+    deconnexion.setAttribute("onclick", "changePage(\"logout\", \"page\");");
+    deconnexion.innerHTML = "Déconnexion";
+    bandeau_milieu.appendChild(deconnexion);
+    
     parent_element.appendChild(header);
 
     var contenu = document.createElement("div");

@@ -8,6 +8,7 @@ html, body, div, h1,h2,h3,h4,h5,h6{
 body {
     padding-top: 10px;
 }
+html,body{padding:0px;margin:0px;background-color:#2c3e50;font-family: Arial,sans-serif;}
 
 
 body {
@@ -65,4 +66,9 @@ td.creneau_domicile.creneau_encours {
 td.creneau_domicile.creneau_fin {
     border-bottom: 1px solid #b93d30;
     border-top: 1px solid #e74c3c;
+}
+
+#header_interne div{
+    display:inline-block;
+    margin:5px;
 }
