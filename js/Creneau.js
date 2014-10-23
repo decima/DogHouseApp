@@ -14,22 +14,24 @@ application.Creneau = function (data) {
 };
 application.Creneau.okTime = function (oThis, tmp) {
     heure_courante = tmp.split(":");
-    if (oThis.heure_debut[0] < heure_courante[0]
-            && oThis.heure_fin[0] > heure_courante[0]) {
+    if (parseInt(oThis.heure_debut[0]) < parseInt(heure_courante[0])
+            && parseInt(oThis.heure_fin[0]) > parseInt(heure_courante[0])) {
         return true;
     }
-    if (oThis.heure_debut[0] == oThis.heure_fin[0]
-            && heure_courante[1] < oThis.heure_fin[1]
-            && heure_courante[1] >= oThis.heure_debut[1]) {
+
+    if (parseInt(oThis.heure_debut[0]) == parseInt(oThis.heure_fin[0])
+        &&parseInt(heure_courante[0]) == parseInt(oThis.heure_fin[0])
+            && parseInt(heure_courante[1]) < parseInt(oThis.heure_fin[1])
+            && parseInt(heure_courante[1]) >= parseInt(oThis.heure_debut[1])) {
         return true;
     }
     if (oThis.heure_debut[0] == heure_courante[0]
             && oThis.heure_debut[1] <= heure_courante[1]){
-        return true;
+        return oThis.heure_fin[0] == heure_courante[0]?oThis.heure_fin[1] > heure_courante[1]:true;
     }
     if (oThis.heure_fin[0] == heure_courante[0]
             && oThis.heure_fin[1] > heure_courante[1]){
-        return true;
+        return oThis.heure_debut[0] == heure_courante[0]?oThis.heure_debut[1] <= heure_courante[1]:true;
     }
     return false;
 };

@@ -49,6 +49,10 @@ drivers.Database.prototype.load = function () {
     if (this.datas === null) {
         this.datas = [];
     }
+    for(index in this.datas){
+        if(this.datas[index]!=null)
+        this.datas[index].identifier = index;
+    }
     return this;
 };
 

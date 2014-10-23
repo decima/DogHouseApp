@@ -149,7 +149,7 @@ view.Calendrier.prototype = {
                         tableau += "height:100%;font-size:16px;color:white;line-height:30px;";
                         tableau += "cursor:pointer;position:relative;border:0px;display:inline-block;left:0px;text-align:center;";
                         tableau += "'";
-                        tableau += " onclick='changePage(\"/delete-event/"+ligne[j]["creneau"].toiletteur+"/"+j+"\", \"subpage\");'";
+                        tableau += " onclick='changePage(\"/delete-event/"+ligne[j]["creneau"].toiletteur+"/"+ligne[j]["creneau"].identifier+"\", \"subpage\");'";
                         tableau += ">";
                         tableau += "x";
                         //tableau += "✘";

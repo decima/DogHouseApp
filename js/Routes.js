@@ -75,7 +75,7 @@ application.Routes = {
     },
     "/delete-event/{cid}/{eid}": function (cid, eid) {
         var db_evt = new drivers.DB("creneaux");
-        var events = db_evt.getAll();
+        /*var events = db_evt.getAll();
 
         // On récupère l'id de l'event dans le tableau
         var event_id = 0;
@@ -91,10 +91,15 @@ application.Routes = {
                 }
             }
         }
-        db_evt.removeItem(event_id);
+        db_evt.removeItem(event_id);*/
+        db_evt.removeItem(eid);
         page = new view.Main();
         changePage("", "page");
         page.afficher("page");
+    },
+    "/all-creneaux": function () {
+        var db_evt = new drivers.DB("creneaux");
+        console.log(db_evt.getAll());
     },
     "/delete-all-dogs": function () {
         var db_dog = new drivers.DB("animaux");
