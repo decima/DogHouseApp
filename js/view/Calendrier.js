@@ -78,7 +78,11 @@ view.Calendrier.prototype = {
                         //console.log("["+i+"]["+j+"] : "+creneau_ouvert[i]+" | "+c_par_e[i][j].okTime(i_heure_debut) + " | " +c_par_e[i][j].isLastQuarter(i_heure_debut));
                         if (application.Creneau.okTime(c_par_e[i][j], i_heure_debut)) {      // Si la tranche horaire est dans le créneau
                             ligne[i]["creneau"] = c_par_e[i][j];
-                            if (application.Creneau.isLastQuarter(c_par_e[i][j], i_heure_debut)) {
+                            if (application.Creneau.isLastQuarter(c_par_e[i][j], i_heure_debut) && creneau_ouvert[i] == 0){
+                                ligne[i]["occupe"] = 4;
+                                creneau_ouvert[i] = 0;
+                            }
+                            else if (application.Creneau.isLastQuarter(c_par_e[i][j], i_heure_debut)) {
                                 ligne[i]["occupe"] = 3;
                                 creneau_ouvert[i] = 0;
                             }
@@ -121,10 +125,10 @@ view.Calendrier.prototype = {
                             tableau += " creneau_domicile";
                         }
 
-                        if (ligne[j]["occupe"] == 3 && ligne[j]["creneau"].type == application.Creneau.type.A_DOMICILE) {
+                        if ((ligne[j]["occupe"] == 3 || ligne[j]["occupe"] == 4) && ligne[j]["creneau"].type == application.Creneau.type.A_DOMICILE) {
                             tableau += " creneau_domicile_ico";
                         }
-                        else if (ligne[j]["occupe"] == 3 && ligne[j]["creneau"].type == application.Creneau.type.EN_SALON) {
+                        else if ((ligne[j]["occupe"] == 3 || ligne[j]["occupe"] == 4) && ligne[j]["creneau"].type == application.Creneau.type.EN_SALON) {
                             tableau += " creneau_salon_ico";
                         }
 
@@ -138,16 +142,19 @@ view.Calendrier.prototype = {
                             case 3:
                                 tableau += " creneau_fin";
                                 break;
+                            case 4:
+                                tableau += " creneau_petit";
+                                break;
                             default :
                                 break;
                         }
                     }
                     tableau += "'>";
-                    if (ligne[j]["occupe"] == 1) {
+                    if (ligne[j]["occupe"] == 1 || ligne[j]["occupe"] == 4) {
                         tableau += "<span id='delete-btn-"+j+"' title='Supprimer'";
                         tableau += " style='";
                         tableau += "height:100%;font-size:16px;color:white;line-height:30px;";
-                        tableau += "cursor:pointer;position:relative;border:0px;display:inline-block;left:0px;text-align:center;";
+                        tableau += "cursor:pointer;position:relative;border:0px;display:inline-block;left:0px;text-align:center;margin-right:10px;";
                         tableau += "'";
                         tableau += " onclick='changePage(\"/delete-event/"+ligne[j]["creneau"].toiletteur+"/"+ligne[j]["creneau"].identifier+"\", \"subpage\");'";
                         tableau += ">";
@@ -155,7 +162,7 @@ view.Calendrier.prototype = {
                         //tableau += "✘";
                         tableau += "</span>";
                     }
-                    else if (ligne[j]["occupe"] == 3) {
+                    if (ligne[j]["occupe"] == 3  || ligne[j]["occupe"] == 4) {
                         // On affiche les informations
                         var db_dog = new drivers.DB("animaux");
                         var dog = db_dog.getItem(ligne[j]["creneau"].animal);
