@@ -24,22 +24,20 @@ view.Calendar = function (date) {
 };
 view.Calendar.prototype = {
     getPreviousDate: function (date) {
-        d = date.split("-");
-        int_d = new Date(d[0], d[1]-1, d[2]);
+        var d = date.split("-");
+        var int_d = new Date(d[0], d[1]-1, d[2]);
         int_d.setDate(int_d.getDate() - 1);
-        de = int_d;
+        var de = int_d;
         return de.getFullYear() + "-" + (de.getMonth()+1) + "-" + de.getDate();
     },
     getNextDate: function (date) {
-        d = date.split("-");
-        int_d = new Date(d[0], d[1]-1, d[2]);
+        var d = date.split("-");
+        var int_d = new Date(d[0], d[1]-1, d[2]);
         int_d.setDate(int_d.getDate() + 1);
-        de = int_d;
+        var de = int_d;
 
         //de = new Date(int_d);
         return de.getFullYear() + "-" + (de.getMonth()+1) + "-" + de.getDate();
-
-
     },
     afficher: function (parent) {
         var parent_element = document.getElementById(parent);

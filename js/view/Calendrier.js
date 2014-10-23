@@ -19,7 +19,8 @@ Array.prototype.inArray = function (needle) {
             return true;
     }
     return false;
-}
+};
+
 
 
 /**
@@ -51,7 +52,6 @@ view.Calendrier = function (creneaux, date) {
     });
 };
 view.Calendrier.prototype = {
-    
     afficher: function (parent) {
         var oThis = this;
         var parent_element = document.getElementById(parent);
@@ -96,7 +96,7 @@ view.Calendrier.prototype = {
             // on gère l'affichage
             var tableau = "";
             tableau += "<table class='edt'>";
-            tableau += "<caption style='color:#f1f1f1;font-size:18px;text-align:center;margin-top:20px;margin-bottom:20px;'>"+oThis.date+"</caption>";
+            tableau += "<caption style='color:#f1f1f1;font-size:18px;text-align:center;margin-top:20px;margin-bottom:20px;'>"+view.Calendrier.getDisplayDate(oThis.date)+"</caption>";
             tableau += "<tbody>";
             tableau += "<thead>";
             tableau += "<td></td>";
@@ -202,4 +202,80 @@ view.Calendrier.prototype = {
             return true;
         return false;
     }
+};
+
+
+
+view.Calendrier.getDisplayDate = function (date){
+    var d = date.split("-");
+    var annee = d[0];
+    var mois = d[1];
+    var jour = d[2];
+
+    var display_date = "";
+    var d_day = new Date(d[0], d[1]-1, d[2]);
+    switch(d_day.getDay()){
+        case 0:
+            display_date = "Dimanche ";
+            break;
+        case 1:
+            display_date = "Lundi ";
+            break;
+        case 2:
+            display_date = "Mardi ";
+            break;
+        case 3:
+            display_date = "Mercredi ";
+            break;
+        case 4:
+            display_date = "Jeudi ";
+            break;
+        case 5:
+            display_date = "Vendredi ";
+            break;
+        case 6:
+            display_date = "Samedi ";
+            break;
+    }
+    display_date += jour +" ";
+    switch(d_day.getMonth()) {
+        case 0:
+            display_date += "Janvier ";
+            break;
+        case 1:
+            display_date += "Février ";
+            break;
+        case 2:
+            display_date += "Mars ";
+            break;
+        case 3:
+            display_date += "Avril ";
+            break;
+        case 4:
+            display_date += "Mai ";
+            break;
+        case 5:
+            display_date += "Juin ";
+            break;
+        case 6:
+            display_date += "Juillet ";
+            break;
+        case 7:
+            display_date += "Août ";
+            break;
+        case 8:
+            display_date += "Septembre ";
+            break;
+        case 9:
+            display_date += "Octobre ";
+            break;
+        case 10:
+            display_date += "Novembre ";
+            break;
+        case 11:
+            display_date += "Décembre ";
+            break;
+    }
+    display_date += annee;
+    return display_date;
 };
