@@ -62,7 +62,7 @@ application.Routes = {
             var clt = client;
             var emp = employe;
 
-            if (employe != "" && client != "" && chien != "" && date != "" && heure_debut != "" && minute_debut != "" && heure_fin != "" && minute_fin != "" && type != "") {
+            if (employe != "-1" && client != "-1" && chien != "-1" && date != "" && heure_debut != "" && minute_debut != "" && heure_fin != "" && minute_fin != "" && type != "-1") {
                 var db_cre = new drivers.DB("creneaux");
                 var cre = new application.Creneau({heure: {debut: heure_debut + ":" + minute_debut, fin: heure_fin + ":" + minute_fin}, date: date, type: type, client: clt, animal: dog, toiletteur: emp});
                 db_cre.addItem(cre);
@@ -83,11 +83,11 @@ application.Routes = {
         for(var i = 0 ; i < events.length ; i++) {
             if(events[i] != null) {
                 if(events[i].toiletteur == cid){
-                    temp_id++;
                     if(temp_id == eid) {
                         event_id = i;
                         break;
                     }
+                    temp_id++;
                 }
             }
         }
@@ -99,6 +99,10 @@ application.Routes = {
     "/delete-all-dogs": function () {
         var db_dog = new drivers.DB("animaux");
         db_dog.destroy();
+    },
+    "/delete-all-creneaux": function () {
+        var db_evt = new drivers.DB("creneaux");
+        db_evt.destroy();
     },
     "/clients": function () {
         page = new view.Client();
@@ -246,7 +250,6 @@ application.Routes = {
                 var db_clt = new drivers.DB("employes");
                 var clt = new application.Employe({nom: "" + nom + "", prenom: "" + prenom + "", telephone: "" + tel + "", rue: "" + adresse + "", ville: "" + ville + "", cp: "" + cp + "", login: "" + login + "", password: "" + pass + ""});
                 db_clt.addItem(clt);
-                console.log(clt);
                 changePage("/employes", "subpage");
             }
             else {
@@ -264,7 +267,8 @@ application.Routes = {
         } else {
             var buttons = page.afficher("subpage", view.Employe.action.EDIT, clt);
             buttons[0].addEventListener("click", function () {
-                // Modifier                 var nom = document.getElementById("lastName").value;
+                // Modifier
+                var nom = document.getElementById("lastName").value;
                 var prenom = document.getElementById("firstName").value;
                 var tel = document.getElementById("phone").value;
                 var adresse = document.getElementById("address").value;

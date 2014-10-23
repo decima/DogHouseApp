@@ -27,15 +27,18 @@ Array.prototype.inArray = function (needle) {
  * @param rdv Array of Creneau
  * @constructor
  */
-view.Calendrier = function (creneaux) {
+view.Calendrier = function (creneaux, date) {
     var oThis = this;
     oThis.creneaux = creneaux;
+    oThis.date = date;
+
     // On récupère le nombre d'employés
     oThis.employes = [];
     var db_emp = new drivers.DB("employes");
     var emp = db_emp.getAll();
     this.creneaux.forEach(function (c) {
-        if (!oThis.employes.inArray(emp[c.toiletteur].nom))
+        //console.log(c);
+        if (c != null && !oThis.employes.inArray(emp[c.toiletteur].nom))
             oThis.employes.push(emp[c.toiletteur].nom);
     });
     oThis.nb_employes = oThis.employes.length;
@@ -93,6 +96,7 @@ view.Calendrier.prototype = {
             // on gère l'affichage
             var tableau = "";
             tableau += "<table class='edt'>";
+            tableau += "<caption style='color:#f1f1f1;font-size:18px;text-align:center;margin-top:20px;margin-bottom:20px;'>"+oThis.date+"</caption>";
             tableau += "<tbody>";
             tableau += "<thead>";
             tableau += "<td></td>";
@@ -133,27 +137,15 @@ view.Calendrier.prototype = {
                     }
                     tableau += "'>";
                     if (ligne[j]["occupe"] == 1) {
-                        // On ajoute le bouton Supprimer
-                        var div_suppr = document.createElement("div");
-                        div_suppr.addEventListener("click", function () {
-                            changePage("/delete-event/" + cid + "/" + j, "subpage");
-                        });
-                        div_suppr.setAttribute("id", "delete-btn-" + j);
-                        div_suppr.setAttribute("title", "supprimer");
-                        var text_delete = document.createTextNode("✘");
-                        div_suppr.appendChild(text_delete);
-                        div_suppr.style.width = "20%";
-                        div_suppr.style.height = "100%";
-                        div_suppr.style.fontSize = "25px";
-                        div_suppr.style.background = "#e74c3c";
-                        div_suppr.style.color = "white";
-                        div_suppr.style.cursor = "pointer";
-                        div_suppr.style.marginTop = "20px";
-                        div_suppr.style.position = "relative";
-                        div_suppr.style.bottom = "-1px";
-                        div_suppr.style.left = "0px";
-                        div_suppr.style.border = "0px";
-                        tableau += div_suppr;
+                        tableau += "<span id='delete-btn-"+j+"' title='Supprimer'";
+                        tableau += " style='";
+                        tableau += "width:20%;height:100%;font-size:25px;color:white;";
+                        tableau += "cursor:pointer;position:relative;border:0px;display:inline-block;left:0px;text-align:center;";
+                        tableau += "'";
+                        tableau += " onclick='changePage(\"/delete-event/"+ligne[j]["creneau"].toiletteur+"/"+j+"\", \"subpage\");'";
+                        tableau += ">";
+                        tableau += "✘";
+                        tableau += "</span>";
                     }
                     else if (ligne[j]["occupe"] == 3) {
                         // On affiche les informations
@@ -161,8 +153,11 @@ view.Calendrier.prototype = {
                         var dog = db_dog.getItem(ligne[j]["creneau"].animal);
                         var db_clt = new drivers.DB("clients");
                         var clt = db_clt.getItem(ligne[j]["creneau"].client);
+
+                        //console.log("----- dog : "+dog);
+                        //console.log("----- clt : "+clt);
                         //tableau += ligne[j]["creneau"].client.nom + " : " + ligne[j]["creneau"].animal.nom;
-                        tableau += clt.nom + " : " + dog.nom;
+                        tableau += clt.prenom + " " + clt.nom + " : " + dog.nom;
                     }
                     tableau += "</td>";
                 }

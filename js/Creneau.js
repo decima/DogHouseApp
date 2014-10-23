@@ -15,18 +15,22 @@ application.Creneau = function (data) {
 application.Creneau.okTime = function (oThis, tmp) {
     heure_courante = tmp.split(":");
     if (oThis.heure_debut[0] < heure_courante[0]
-            && oThis.heure_fin[0] > heure_courante[0])
+            && oThis.heure_fin[0] > heure_courante[0]) {
         return true;
+    }
     if (oThis.heure_debut[0] == oThis.heure_fin[0]
             && heure_courante[1] < oThis.heure_fin[1]
-            && heure_courante[1] >= oThis.heure_debut[1])
+            && heure_courante[1] >= oThis.heure_debut[1]) {
         return true;
+    }
     if (oThis.heure_debut[0] == heure_courante[0]
-            && oThis.heure_debut[1] <= heure_courante[1])
+            && oThis.heure_debut[1] <= heure_courante[1]){
         return true;
+    }
     if (oThis.heure_fin[0] == heure_courante[0]
-            && oThis.heure_fin[1] > heure_courante[1])
+            && oThis.heure_fin[1] > heure_courante[1]){
         return true;
+    }
     return false;
 };
 
@@ -39,7 +43,7 @@ application.Creneau.isLastQuarter = function (oThis, tmp) {
         }
     } else {
         if (hf[0] - 1 == hc[0]) {
-            return  hc[0] == "45";
+            return  hc[1] == "45";
         }
     }
     return false;

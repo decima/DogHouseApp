@@ -57,13 +57,9 @@ view.Calendar.prototype = {
         parent_element.appendChild(cal);
         // On part chercher les données en base de données
         var db_cre = new drivers.DB("creneaux");
-        console.log(this.date);
         creneaux = db_cre.searchItem(drivers.DBC.EQ("date", this.date));
         // On affiche le calendrier
-        var calendrier = new view.Calendrier(creneaux);
-
-
-
+        var calendrier = new view.Calendrier(creneaux, this.date);
         calendrier.afficher(parent);
         return true;
     }};
