@@ -1,6 +1,7 @@
 if (typeof (drivers) === "undefined") {
     var drivers = {};
 }
+/* intersection de deux tableaux */
 Array.prototype.intersect = function (arr2) {
     var temp = [];
     for (var i = 0; i < this.length; i++) {
@@ -13,6 +14,7 @@ Array.prototype.intersect = function (arr2) {
     }
     return temp;
 }
+/* Union de deux tableaux */
 Array.prototype.union = function (arr2) {
     var temp = [];
     for (var i = 0; i < this.length; i++) {
@@ -29,6 +31,7 @@ Array.prototype.union = function (arr2) {
     }
     return temp;
 }
+/* Système de bases de données */
 drivers.Database = function (tableName) {
     if (typeof (Storage) !== "undefined") {
         this.datas = [];
@@ -39,11 +42,13 @@ drivers.Database = function (tableName) {
         throw new drivers.Database.NoStorageException();
     }
 };
+/* Exception si Storage n'existe pas */
 drivers.Database.NoStorageException = function () {
 };
 drivers.Database.NoStorageException.prototype.toString = function () {
     return "No Storage found";
 };
+/* chargement de la base de données */
 drivers.Database.prototype.load = function () {
     this.datas = JSON.parse(window.localStorage.getItem(this.tableName));
     if (this.datas === null) {
@@ -55,19 +60,19 @@ drivers.Database.prototype.load = function () {
     }
     return this;
 };
-
+/* déchargement de la base de données */
 drivers.Database.prototype.save = function () {
     this.is_loaded = false;
     window.localStorage.setItem(this.tableName, JSON.stringify(this.datas));
     return this;
 };
-
+/* vide toute la base de données */
 drivers.Database.prototype.destroy = function () {
     window.localStorage.removeItem(this.tableName);
     this.load();
     return this;
 };
-
+/* ajoute un élément */
 drivers.Database.prototype.addItem = function (e) {
     this.load();
     this.datas.push(e);
@@ -75,12 +80,13 @@ drivers.Database.prototype.addItem = function (e) {
     return this.datas.length - 1;
 
 };
-
+/* retirer un élément */
 drivers.Database.prototype.removeItem = function (index) {
     this.load();
     this.datas[index] = undefined;
     return this.save();
 };
+/* récupérer l'item par l'index */
 drivers.Database.prototype.getItem = function (index) {
     this.load();
     if (this.datas[index] !== undefined && this.datas.length > index) {
@@ -88,6 +94,7 @@ drivers.Database.prototype.getItem = function (index) {
     }
     return null;
 };
+/* remplacer l'objet (index/item) */
 drivers.Database.prototype.replaceItem = function (index, item) {
     if (this.getItem(index) != null) {
         this.datas[index] = item;
@@ -101,13 +108,13 @@ drivers.Database.prototype.replaceItem = function (index, item) {
         return idex;
     }
 }
-
+/* récupérer toutes les données de la base */
 drivers.Database.prototype.getAll = function () {
     this.load();
     return this.datas;
 };
 
-
+/* création de conditions de recherche*/
 drivers.Database.Conditions = function (type, data) {
     this.typed = type;
     this.data = data;
@@ -135,13 +142,14 @@ drivers.Database.Conditions.type = {
     EQ: 226,
     NEQ: 227
 };
-
+/* conditions combinatoires*/
 drivers.Database.Conditions.AND = function (cdt1, cdt2) {
     return new drivers.Database.Conditions(this.type.AND, arguments);
 };
 drivers.Database.Conditions.OR = function (cdt1, cdt2) {
     return new drivers.Database.Conditions(this.type.OR, arguments)
 };
+/* conditions standard*/
 drivers.Database.Conditions.LT = function (field, value) {
     var a = {field: field, value: value};
     return new drivers.Database.Conditions(this.type.LT, a);
@@ -167,6 +175,7 @@ drivers.Database.Conditions.NEQ = function (field, value) {
     return new drivers.Database.Conditions(this.type.NEQ, a);
 };
 
+/* rechercher par condition standard */
 drivers.Database.prototype.atomicSearchItem = function (cdt) {
     ret = [];
     this.datas.forEach(function (a, b, c) {
@@ -202,7 +211,7 @@ drivers.Database.prototype.atomicSearchItem = function (cdt) {
     return ret;
 
 }
-
+/* recherche par conditions */
 drivers.Database.prototype.searchItem = function (cdt) {
     var ret = [];
     if (cdt.isCombiner()) {
@@ -232,6 +241,7 @@ drivers.DB = drivers.Database;
 drivers.DBC = drivers.Database.Conditions;
 var DBC = drivers.DBC;
 
+/*exemple de database */
 drivers.Database.sampleSearch = function () {
     var s = new drivers.DB("sample");
     s.addItem({prenom: "Henri", nom: "Larget", age: 22, sexe: "h"});

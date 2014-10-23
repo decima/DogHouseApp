@@ -14,7 +14,7 @@ drivers.Route = function () {
 };
 
 drivers.Route.listener = null;
-
+/* assigner un chemin /page/{variable} */
 drivers.Route.prototype.assignRoute = function (path, action) {
     path = "/" + path + "/";
     var path1 = path.replace(/\/+/g, "\/").toLowerCase();
@@ -36,6 +36,7 @@ if (typeof (drivers.Route.prototype.connected_function) == "undefined") {
         return true;
     }
 }
+/* calcul de la route */
 drivers.Route.prototype.proceed = function () {
     var v = this.connected_function();
 
@@ -83,7 +84,7 @@ drivers.Route.prototype.proceed = function () {
 
 
 
-
+/*actier le hashchange evenement */
 drivers.Route.prototype.enableProceedEvent = function () {
     var o_this = this;
     var fnc = function () {
@@ -95,7 +96,7 @@ drivers.Route.prototype.enableProceedEvent = function () {
         window.addEventListener("hashchange", fnc, false);
     }
 };
-
+/*désactiver le hashchange evenement */
 drivers.Route.prototype.disableProceedEvent = function () {
     if (drivers.Route.listener !== null) {
         window.removeEventListener("hashchange", drivers.Route.listener);

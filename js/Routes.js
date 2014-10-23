@@ -1,6 +1,7 @@
 if (typeof (application) === "undefined") {
     var application = {};
 }
+/* les routes de l'application */
 application.Routes = {
     "/": function () {
         var is_logged = session.get("logged", false);
@@ -97,10 +98,17 @@ application.Routes = {
         changePage("", "page");
         page.afficher("page");
     },
+   /*
+    
+    
     "/all-creneaux": function () {
         var db_evt = new drivers.DB("creneaux");
         console.log(db_evt.getAll());
     },
+    
+    
+    
+    */
     "/delete-all-dogs": function () {
         var db_dog = new drivers.DB("animaux");
         db_dog.destroy();
