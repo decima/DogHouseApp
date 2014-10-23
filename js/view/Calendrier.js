@@ -121,6 +121,13 @@ view.Calendrier.prototype = {
                             tableau += " creneau_domicile";
                         }
 
+                        if (ligne[j]["occupe"] == 3 && ligne[j]["creneau"].type == application.Creneau.type.A_DOMICILE) {
+                            tableau += " creneau_domicile_ico";
+                        }
+                        else if (ligne[j]["occupe"] == 3 && ligne[j]["creneau"].type == application.Creneau.type.EN_SALON) {
+                            tableau += " creneau_salon_ico";
+                        }
+
                         switch (ligne[j]["occupe"]) {
                             case 1:
                                 tableau += " creneau_debut";
@@ -139,12 +146,13 @@ view.Calendrier.prototype = {
                     if (ligne[j]["occupe"] == 1) {
                         tableau += "<span id='delete-btn-"+j+"' title='Supprimer'";
                         tableau += " style='";
-                        tableau += "width:20%;height:100%;font-size:25px;color:white;";
+                        tableau += "height:100%;font-size:16px;color:white;line-height:30px;";
                         tableau += "cursor:pointer;position:relative;border:0px;display:inline-block;left:0px;text-align:center;";
                         tableau += "'";
                         tableau += " onclick='changePage(\"/delete-event/"+ligne[j]["creneau"].toiletteur+"/"+j+"\", \"subpage\");'";
                         tableau += ">";
-                        tableau += "✘";
+                        tableau += "x";
+                        //tableau += "✘";
                         tableau += "</span>";
                     }
                     else if (ligne[j]["occupe"] == 3) {

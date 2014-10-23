@@ -74,6 +74,17 @@ td.creneau_domicile.creneau_fin {
     border: 3px solid #b93d30;
     border-top: 0px;
 }
+td.creneau_domicile_ico {
+    background-image: url('icons/home.png');
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+td.creneau_salon_ico {
+    background-image: url('icons/salon.png');
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
 
 #header_interne div{
     display:inline-block;
