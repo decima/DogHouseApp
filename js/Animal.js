@@ -20,5 +20,5 @@ application.Animal.gabarit = {
 };
 application.Animal.sexe = {
     MALE: 0,
-    FEMELLE: 1,
+    FEMELLE: 1
 };

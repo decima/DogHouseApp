@@ -16,7 +16,7 @@ view.Employe = function () {
 view.Employe.action = {
     ADD: 1,
     EDIT: 3,
-    LIST: 4,
+    LIST: 4
 };
 
 view.Employe.prototype.afficher = function (parent, action) {
@@ -424,4 +424,3 @@ view.Employe.prototype.afficher = function (parent, action) {
     }
     return true;
 };
-

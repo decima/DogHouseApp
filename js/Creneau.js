@@ -63,7 +63,7 @@ application.Creneau.prototype.toObject = function () {
         okTime: this.okTime,
         isLastQuarter: this.isLastQuarter,
         heure_debut: this.heure_debut,
-        heure_fin: this.heure_fin,
+        heure_fin: this.heure_fin
     };
     return obj;
 }
