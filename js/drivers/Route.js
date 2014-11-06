@@ -14,13 +14,13 @@ drivers.Route = function () {
 };
 
 drivers.Route.listener = null;
-/* assigner un chemin /page/{variable} */
+// assigner un chemin /page/{variable}
 drivers.Route.prototype.assignRoute = function (path, action) {
     path = "/" + path + "/";
     var path1 = path.replace(/\/+/g, "\/").toLowerCase();
     path1 = path1.replace(/^\//, "");
     path1 = path1.replace(/\/$/, "");
-    if (path1 == "") {
+    if (path1 === "") {
         this.routes.fixed["HOME"] = action;
     }
     else if (path1.match(/\{[a-zA-Z0-9_]+\}/g) !== null) {

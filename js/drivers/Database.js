@@ -13,7 +13,7 @@ Array.prototype.intersect = function (arr2) {
         }
     }
     return temp;
-}
+};
 /* Union de deux tableaux */
 Array.prototype.union = function (arr2) {
     var temp = [];
@@ -24,13 +24,13 @@ Array.prototype.union = function (arr2) {
         var add = true;
         for (var k = 0; k < temp.length; k++) {
             if (temp[k] === arr2[j])
-                add = false;
+              {  add = false;}
         }
         if (add)
-            temp.push(arr2[j]);
+            {temp.push(arr2[j]);}
     }
     return temp;
-}
+};
 /* Système de bases de données */
 drivers.Database = function (tableName) {
     if (typeof (Storage) !== "undefined") {
@@ -55,8 +55,9 @@ drivers.Database.prototype.load = function () {
         this.datas = [];
     }
     for(index in this.datas){
-        if(this.datas[index]!=null)
+        if(this.datas[index]!=null){
         this.datas[index].identifier = index;
+      }
     }
     return this;
 };
@@ -100,14 +101,14 @@ drivers.Database.prototype.replaceItem = function (index, item) {
         this.datas[index] = item;
         this.save();
         return index;
-    } else if (typeof arguments[2] === undefined || arguments[2] === false) {
+    } else if (typeof arguments[2] === undefined || !arguments[2]) {
         return false;
     } else {
         var idex = this.addItem(item);
         this.save();
         return idex;
     }
-}
+};
 /* récupérer toutes les données de la base */
 drivers.Database.prototype.getAll = function () {
     this.load();
@@ -147,7 +148,7 @@ drivers.Database.Conditions.AND = function (cdt1, cdt2) {
     return new drivers.Database.Conditions(this.type.AND, arguments);
 };
 drivers.Database.Conditions.OR = function (cdt1, cdt2) {
-    return new drivers.Database.Conditions(this.type.OR, arguments)
+    return new drivers.Database.Conditions(this.type.OR, arguments);
 };
 /* conditions standard*/
 drivers.Database.Conditions.LT = function (field, value) {
@@ -182,52 +183,58 @@ drivers.Database.prototype.atomicSearchItem = function (cdt) {
         if (a != null) {
             switch (cdt.getType()) {
                 case drivers.Database.Conditions.type.EQ:
-                    if (a[cdt.getData().field] === cdt.getData().value)
-                        ret.push(a);
+                    if (a[cdt.getData().field] === cdt.getData().value){
+                        ret.push(a);}
                     break;
                 case drivers.Database.Conditions.type.NEQ:
-                    if (a[cdt.getData().field] !== cdt.getData().value)
-                        ret.push(a);
+                    if (a[cdt.getData().field] !== cdt.getData().value){
+                            ret.push(a);}
                     break;
                 case drivers.Database.Conditions.type.LT:
-                    if (a[cdt.getData().field] <= cdt.getData().value)
-                        ret.push(a);
+                    if (a[cdt.getData().field] <= cdt.getData().value){
+                            ret.push(a);}
                     break;
                 case drivers.Database.Conditions.type.GT:
-                    if (a[cdt.getData().field] >= cdt.getData().value)
-                        ret.push(a);
+                    if (a[cdt.getData().field] >= cdt.getData().value){
+                            ret.push(a);}
                     break;
                 case drivers.Database.Conditions.type.SLT:
-                    if (a[cdt.getData().field] < cdt.getData().value)
-                        ret.push(a);
+                    if (a[cdt.getData().field] < cdt.getData().value){
+                            ret.push(a);}
                     break;
                 case drivers.Database.Conditions.type.SGT:
-                    if (a[cdt.getData().field] > cdt.getData().value)
-                        ret.push(a);
+                    if (a[cdt.getData().field] > cdt.getData().value){
+                            ret.push(a);}
                     break;
+                default:
+                    ret.push(a);
+
             }
         }
     });
     return ret;
 
-}
+};
 /* recherche par conditions */
 drivers.Database.prototype.searchItem = function (cdt) {
     var ret = [];
+    var i = 1;
     if (cdt.isCombiner()) {
         switch (cdt.getType()) {
             case drivers.Database.Conditions.type.AND:
                 ret = this.searchItem(cdt.getData()[0]);
-                for (var i = 1; i < cdt.getData().length; i++) {
+                for (i = 1; i < cdt.getData().length; i++) {
                     ret = ret.intersect(this.searchItem(cdt.getData()[i]));
                 }
                 break;
             case drivers.Database.Conditions.type.OR:
                 ret = this.searchItem(cdt.getData()[0]);
-                for (var i = 1; i < cdt.getData().length; i++) {
+                for (i = 1; i < cdt.getData().length; i++) {
                     ret = ret.union(this.searchItem(cdt.getData()[i]));
                 }
                 break;
+            default:
+              ret = ret;
         }
         return ret;
     } else {
