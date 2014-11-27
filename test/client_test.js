@@ -39,3 +39,18 @@ test("test_editclient", 5, function(){
 	equal(clt3.prenom,"PrenomTest");
 	equal(clt3.telephone,"0123456789");
 });
+test("test_adddog", 3, function(){
+	var db_clt = new drivers.DB("clients");
+	var size = db_clt.getAll().length;
+	var clt = new application.Client({nom: "Nom", prenom: "Prenom", telephone: "9876543210", rue: "", ville: "", cp: ""});
+	equal(db_clt.addItem(clt),size);
+	var cid = size;
+	
+	notEqual(db_clt.getItem(cid), null);
+	
+	var db_dog = new drivers.DB("animaux");
+	var size_dog = db_dog.getAll().length;
+	var dog = new application.Animal({cid: "" + cid + "", nom: "Tobby", sexe: ""+application.Animal.sexe.Male+"", race: "Caniche", ""+gabarit: application.Animal.gabarit.PETIT+""});
+	
+	equal(db_dog.addItem(dog),size_dog);
+});
