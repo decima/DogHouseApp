@@ -14,23 +14,11 @@ drivers.Route.prototype.connected_function = function () {
 };
 var session = new drivers.Session();
 window.onload = function () {
-    //drivers.DB.sampleSearch(true);
-
     var t = new drivers.DB("employes");
     if (t.getAll().length < 1) {
         createData();
-    } /*else {
-        var e = t.getAll();
-        if(e[0]==null){
-            createData();
-        }
-        if (typeof (e[0].passwd) == "undefined") {
-            createData();
-
-        }
-    }*/
-
-
+    }
+	
     if (DEBUG_MODE) {
         var btn_refresh = document.createElement("button");
         btn_refresh.appendChild(document.createTextNode("refresh"));
@@ -53,13 +41,9 @@ window.onload = function () {
     route.enableProceedEvent();
 };
 
-function dbtest() {
-
-}
-
 function createData() {
-        var db_clt = new drivers.DB("employes");
-db_clt.destroy();
+    var db_clt = new drivers.DB("employes");
+	db_clt.destroy();
     var a = new application.Employe({
         nom: "larget",
         prenom: "henri",
@@ -76,6 +60,4 @@ db_clt.destroy();
     });
     db_clt.addItem(a);
     db_clt.addItem(b);
-
-
 }

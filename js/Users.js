@@ -46,7 +46,6 @@ application.Users.prototype.connect = function (login, passwd) {
     var db = new drivers.DB("users");
     var res = db.searchItem(drivers.DBC.AND(drivers.DBC.EQ("user", login), drivers.DBC.EQ("pass", passwd)));
     if (res.length > 0) {
-        
         application.User.reload(res[0]);
         return true;
     }
