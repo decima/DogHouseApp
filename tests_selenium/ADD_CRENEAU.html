@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://doghouse.henri-larget.com/" />
+<title>CRENEAU</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CRENEAU</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>//div[@onclick='changePage(&quot;&quot;, &quot;subpage&quot;);']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@onclick='changePage(&quot;clients&quot;, &quot;subpage&quot;);']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Connor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Sarah</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phone</td>
+	<td>0323456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address</td>
+	<td>14 avenue des fleurs</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cp</td>
+	<td>69004</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=city</td>
+	<td>randomCity</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@onclick='changePage(&quot;clients&quot;, &quot;subpage&quot;);']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='subpage']/div/div[2]/table/tbody/tr/td[2]</td>
+	<td>Sarah</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='subpage']/div/div[2]/table/tbody/tr/td[3]/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-dog-btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nom</td>
+	<td>John</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=sexe</td>
+	<td>label=Male</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=race</td>
+	<td>lassa abso</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gabarit</td>
+	<td>label=Petit</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=td</td>
+	<td>John</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@onclick='changePage(&quot;&quot;, &quot;subpage&quot;);']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=employe</td>
+	<td>label=larget henri</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=client</td>
+	<td>label=Connor Sarah</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=heure_debut</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=minute_debut</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=heure_fin</td>
+	<td>label=14</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=minute_fin</td>
+	<td>label=30</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=type</td>
+	<td>label=En salon</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='subpage']/table/tbody[2]/tr[22]/td[2]</td>
+	<td>Sarah Connor : John</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=delete-btn-0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//div[@id='subpage']/table/tbody[2]/tr[22]/td[2]</td>
+	<td>Sarah Connor : John</td>
+</tr>
+</tbody></table>
+</body>
+</html>

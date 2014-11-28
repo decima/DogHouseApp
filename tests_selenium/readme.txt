@@ -1,0 +1,1 @@
+Étant donné le fonctionnement du site et les manipulations du dom assez lentes, veuillez à ne pas executer les tests à vitesse maximale. 
