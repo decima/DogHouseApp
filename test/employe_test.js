@@ -20,9 +20,12 @@ function createData() {
     db_clt.addItem(a);
     db_clt.addItem(b);
 }
+function getDB(db){
+	return new drivers.DB(db);
+}
 
 test("test_employeconnect_ok", 1, function(){
-	var t = new drivers.DB("employes");
+	var t = getDB("employes");
     if (t.getAll().length < 1) {
         createData();
     }
@@ -30,7 +33,7 @@ test("test_employeconnect_ok", 1, function(){
 });
 
 test("test_employeconnect_wrongpwd", 1, function(){
-	var t = new drivers.DB("employes");
+	var t = getDB("employes");
     if (t.getAll().length < 1) {
         createData();
     }
@@ -38,7 +41,7 @@ test("test_employeconnect_wrongpwd", 1, function(){
 });
 
 test("test_employeconnect_wronguser", 1, function(){
-	var t = new drivers.DB("employes");
+	var t = getDB("employes");
     if (t.getAll().length < 1) {
         createData();
     }
