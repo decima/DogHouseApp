@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://doghouse.henri-larget.com/" />
+<title>Create_ClientOK</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Create_ClientOK</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>//div[@onclick='changePage(&quot;clients&quot;, &quot;subpage&quot;);']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Connor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Sarah</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=phone</td>
+	<td>0323456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address</td>
+	<td>14 avenue des fleurs</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cp</td>
+	<td>69004</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=city</td>
+	<td>randomCity</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add-btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@onclick='changePage(&quot;clients&quot;, &quot;subpage&quot;);']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='subpage']/div/div[2]/table/tbody/tr/td[2]</td>
+	<td>Sarah</td>
+</tr>
+</tbody></table>
+</body>
+</html>
